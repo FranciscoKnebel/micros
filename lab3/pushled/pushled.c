@@ -42,7 +42,7 @@ int main(int argc,char *argv[])
 		lseek(led_fd,0,SEEK_SET);
 		write(led_fd,&s,sizeof s);
 
-		sleep(1);
+		//sleep(1);
 	}
 	
 	close(led_fd);
