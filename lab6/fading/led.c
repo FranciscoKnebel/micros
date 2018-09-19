@@ -22,7 +22,7 @@ int main(int argc,char * argv[])
         
         pputs("/sys/class/pwm/pwmchip0/pwm1/enable","1");
 
-	int iterations = 4;
+	int iterations = 4	;
 	int jump = 500000;
         for(i=0;i < jump * iterations;i+=jump)
         {
