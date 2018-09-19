@@ -1,19 +1,21 @@
-TARGET=led
-SRCS=$(TARGET).c
+TARGET=libgalileo2.a
+SRCS=pputs.c pgets.c i2c_write_reg.c
 
-FLAGS=-Wall -g -MMD
+FLAGS=-O2 -Wall -MMD
 INCLUDE=-I. -I../include
-LIBDIR=-L../lib
-LIBS=-lgalileo2
+LIBDIR=
+LIBS=
 
 CC=$(CROSS_COMPILE)gcc
+CCAR=$(CROSS_COMPILE)ar
 CFLAGS=$(FLAGS) $(INCLUDE)
 LDFLAGS=$(LIBDIR) $(LIBS)
+CCARFLAGS=-crvs
 
 all: $(TARGET)
 
-$(TARGET): $(SRCS:.c=.o) ../lib/libgalileo2.a
-	$(CC) -o $@ $^ $(LDFLAGS)
+$(TARGET): $(SRCS:.c=.o)
+	$(CCAR) $(CCARFLAGS) $@ $^ 
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<

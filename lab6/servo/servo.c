@@ -48,8 +48,11 @@ int main(int argc,char * argv[])
                 puts("Out of range.");
                 return -2;
         }
-        duty_cycle=angle/M_PI_2*850000+1500000;
-                
+        
+	
+        duty_cycle=angle/M_PI_2*850000+1370000;
+	printf("%lf %d\n",angle,duty_cycle);
+	
         pputs("/sys/class/pwm/pwmchip0/device/pwm_period","20000000");
         
         snprintf(str,sizeof str,"%d\n",duty_cycle);
