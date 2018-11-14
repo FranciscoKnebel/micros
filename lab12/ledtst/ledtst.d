@@ -1,0 +1,1 @@
+ledtst.o: ledtst.c

@@ -1,0 +1,1 @@
+cmd_/home/users/eng10032_10/fpk/micros/lab12/led/led.ko := ld -r -m elf_i386 -T /home/users/eng10032_10/src/lab12/linux-3.8.7/scripts/module-common.lds --build-id  -o /home/users/eng10032_10/fpk/micros/lab12/led/led.ko /home/users/eng10032_10/fpk/micros/lab12/led/led.o /home/users/eng10032_10/fpk/micros/lab12/led/led.mod.o
