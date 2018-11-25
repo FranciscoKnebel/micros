@@ -4,6 +4,7 @@
 \usepackage{fixltx2e}
 \usepackage{calc}
 \usepackage{doxygen}
+\usepackage[export]{adjustbox} % also loads graphicx
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage{makeidx}
@@ -18,7 +19,6 @@
 Portuguese
 % Font selection
 \usepackage[T1]{fontenc}
-\usepackage{mathptmx}
 \usepackage[scaled=.90]{helvet}
 \usepackage{courier}
 \usepackage{amssymb}
@@ -48,7 +48,7 @@ Portuguese
 \hbadness=750
 \setlength{\emergencystretch}{15pt}
 \setlength{\parindent}{0cm}
-\setlength{\parskip}{0.2cm}
+\setlength{\parskip}{3ex plus 2ex minus 2ex}
 \makeatletter
 \renewcommand{\paragraph}{%
   \@startsection{paragraph}{4}{0ex}{-1.0ex}{1.0ex}{%
@@ -73,8 +73,8 @@ Portuguese
 \fancyhead[RO]{\fancyplain{}{\bfseries\thepage}}
 \fancyfoot[LE]{\fancyplain{}{}}
 \fancyfoot[CE]{\fancyplain{}{}}
-\fancyfoot[RE]{\fancyplain{}{\bfseries\scriptsize Gerado em Quarta, 21 de Novembro de 2018 11\+:21\+:41 para Quanser\+Shield por Doxygen }}
-\fancyfoot[LO]{\fancyplain{}{\bfseries\scriptsize Gerado em Quarta, 21 de Novembro de 2018 11\+:21\+:41 para Quanser\+Shield por Doxygen }}
+\fancyfoot[RE]{\fancyplain{}{\bfseries\scriptsize Gerado por Doxygen }}
+\fancyfoot[LO]{\fancyplain{}{\bfseries\scriptsize Gerado por Doxygen }}
 \fancyfoot[CO]{\fancyplain{}{}}
 \fancyfoot[RO]{\fancyplain{}{}}
 \renewcommand{\footrulewidth}{0.4pt}
@@ -111,6 +111,8 @@ Portuguese
   \newpage{\pagestyle{empty}\cleardoublepage}%
 }
 
+\usepackage{caption}
+\captionsetup{labelsep=space,justification=centering,font={bf},singlelinecheck=off,skip=4pt,position=top}
 
 %===== C O N T E N T S =====
 
@@ -118,28 +120,30 @@ Portuguese
 
 % Titlepage & ToC
 \hypersetup{pageanchor=false,
-             bookmarks=true,
              bookmarksnumbered=true,
              pdfencoding=unicode
             }
-\pagenumbering{roman}
+\pagenumbering{alph}
 \begin{titlepage}
 \vspace*{7cm}
 \begin{center}%
 {\Large Quanser\+Shield }\\
 \vspace*{1cm}
-{\large Gerado por Doxygen 1.8.8}\\
-\vspace*{0.5cm}
-{\small Quarta, 21 de Novembro de 2018 11:21:41}\\
+{\large Gerado por Doxygen 1.8.13}\\
 \end{center}
 \end{titlepage}
 \clearemptydoublepage
+\pagenumbering{roman}
 \tableofcontents
 \clearemptydoublepage
 \pagenumbering{arabic}
 \hypersetup{pageanchor=true}
 
 %--- Begin generated contents ---
+\chapter{Quanser\+Shield}
+\label{md_README}
+\Hypertarget{md_README}
+\input{md_README}
 \chapter{Índice dos ficheiros}
 \input{files}
 \chapter{Documentação do ficheiro}
@@ -147,8 +151,10 @@ Portuguese
 %--- End generated contents ---
 
 % Index
+\backmatter
 \newpage
 \phantomsection
+\clearemptydoublepage
 \addcontentsline{toc}{chapter}{Índice}
 \printindex
 

@@ -1,10 +1,12 @@
-TARGET=clock
-SRCS=$(TARGET).c
+TARGET=main
+SRCS=src/$(TARGET).c
+
+DOXYGENCONFIG=doxygen.config
 
 FLAGS=-O2 -Wall -g -MMD
 INCLUDE=-I. -I../include
 LIBDIR=-L../lib
-LIBS=-lgalileo2
+LIBS=
 
 CC=$(CROSS_COMPILE)gcc
 CFLAGS=$(FLAGS) $(INCLUDE)
@@ -21,7 +23,12 @@ $(TARGET): $(SRCS:.c=.o)
 -include $(SRCS:.c=.d)
 
 clean:
-	rm -f *~ *.bak *.o *.d
+	rm -f *~ *.bak
+	rm **/*.o **/*.d
 
 distclean: clean
 	rm -f $(TARGET)
+
+docs: $(SRCS)
+	rm -rf docs/
+	doxygen ${DOXYGENCONFIG}

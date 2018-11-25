@@ -2,12 +2,22 @@
 
 TODO...
 
+## Prerequisites
+- Doxygen
+```
+  $ sudo apt install doxygen
+```
+
+- GCC
+
 
 ## Makefile
 
 ### Documentation
 Compile the project documentation to `docs/` folder.
-```doxygen .config```
+```
+  $ doxygen doxygen.config
+```
 
 ## Versioning
 
