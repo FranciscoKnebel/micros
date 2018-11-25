@@ -11,16 +11,7 @@
  * @see http://www.stack.nl/~dimitri/doxygen/commands.html	
  */
 
-#include <stdio.h>
-
-/**
- * @brief adder, otherwise the index won't have a brief explanation.
- *
- * Detailed explanation.
- */
-int adder(int x, int y) {
-  return x + y;
-}
+#include "main.h"
 
 /**
  * @brief main, otherwise the index won't have a brief explanation.
@@ -29,6 +20,8 @@ int adder(int x, int y) {
  */
 int main() {
   printf("Meu meninao\n.");
+
+  printf("2+3=%d\n", adder(2, 3));
 
   return 0;
 }

@@ -1,9 +1,9 @@
 var indexSectionsWithContent =
 {
-  0: "amq",
-  1: "m",
+  0: "ahlmq",
+  1: "hm",
   2: "am",
-  3: "q"
+  3: "lq"
 };
 
 var indexSectionNames =
@@ -16,9 +16,9 @@ var indexSectionNames =
 
 var indexSectionLabels =
 {
-  0: "Tudo",
-  1: "Ficheiros",
-  2: "Funções",
-  3: "Páginas"
+  0: "All",
+  1: "Files",
+  2: "Functions",
+  3: "Pages"
 };
 

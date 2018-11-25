@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['main',['main',['../main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.c']]],
-  ['main_2ec',['main.c',['../main_8c.html',1,'']]]
+  ['helpers_2ec',['helpers.c',['../helpers_8c.html',1,'']]],
+  ['helpers_2eh',['helpers.h',['../helpers_8h.html',1,'']]],
+  ['helpers2_2ec',['helpers2.c',['../helpers2_8c.html',1,'']]]
 ];

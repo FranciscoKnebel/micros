@@ -1,34 +1,45 @@
-TARGET=main
-SRCS=src/$(TARGET).c
+# Main target program
+TARGET = main
+TARGET_SRC = src/$(TARGET).c
+TARGET_OBJ = $(TARGET_SRC:.c=.o)
 
-DOXYGENCONFIG=doxygen.config
+# List of module files
+# MODULE_LIST contains the space-separated module list.
+# MODULE_SRCS contains the MODULE_LIST items with .c suffix and src/ prefix.
+MODULE_LIST = helpers helpers2
+MODULE_SRCS = $(addsuffix .c, $(addprefix src/, ${MODULE_LIST}))
+MODULE_OBJS = $(MODULE_SRCS:.c=.o)
+
+DOXYGENCONFIG=Doxyfile
 
 FLAGS=-O2 -Wall -g -MMD
-INCLUDE=-I. -I../include
-LIBDIR=-L../lib
+INCLUDE=-I. -I./include
+LIBDIR=-L./lib
 LIBS=
 
 CC=$(CROSS_COMPILE)gcc
 CFLAGS=$(FLAGS) $(INCLUDE)
 LDFLAGS=$(LIBDIR) $(LIBS)
 
+.PHONY: all
 all: $(TARGET)
+	@echo "Build finished."
 
-$(TARGET): $(SRCS:.c=.o)
+$(TARGET): $(MODULE_OBJS) $(TARGET_OBJ) 
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
--include $(SRCS:.c=.d)
+-include $(TARGET_SRC:.c=.d)
 
 clean:
 	rm -f *~ *.bak
-	rm **/*.o **/*.d
+	rm $(MODULE_OBJS) $(MODULE_OBJS:.o=.d)
+	rm $(TARGET) $(TARGET_OBJ) $(TARGET_OBJ:.o=.d)
 
 distclean: clean
-	rm -f $(TARGET)
 
-docs: $(SRCS)
-	rm -rf docs/
+docs: doxygen.config README.md LICENSE.md $(TARGET)
+	@echo "Building Doxygen..."
 	doxygen ${DOXYGENCONFIG}
