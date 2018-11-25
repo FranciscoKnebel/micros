@@ -16,7 +16,7 @@ TODO...
 ### Documentation
 Compile the project documentation to `docs/` folder.
 ```
-  $ doxygen doxygen.config
+  $ doxygen
 ```
 
 Then you can open the `docs/html/index.html` file and search the `Files` section for code documentation.
