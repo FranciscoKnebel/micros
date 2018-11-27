@@ -9,9 +9,13 @@ TODO...
 ```
 
 - GCC
-
+- Make
 
 ## Makefile
+
+### Project
+- Compile the full project with `make`.
+- Clean built files with `make clean`.
 
 ### Documentation
 Compile the project documentation to `docs/` folder.
@@ -20,7 +24,10 @@ Compile the project documentation to `docs/` folder.
 ```
 
 Then you can open the `docs/html/index.html` file and search the `Files` section for code documentation.
-
+To change the docs generation configuration, you need to install the `doxygen-gui` config and run:
+```
+  $ 
+```
 
 ## Versioning
 

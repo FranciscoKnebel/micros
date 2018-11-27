@@ -6,12 +6,11 @@ TARGET_OBJ = $(TARGET_SRC:.c=.o)
 # List of module files
 # MODULE_LIST contains the space-separated module list.
 # MODULE_SRCS contains the MODULE_LIST items with .c suffix and src/ prefix.
-MODULE_LIST = helpers helpers2
+MODULE_LIST = utils/helpers
 MODULE_SRCS = $(addsuffix .c, $(addprefix src/, ${MODULE_LIST}))
 MODULE_OBJS = $(MODULE_SRCS:.c=.o)
 
 DOXYGENCONFIG=Doxyfile
-
 FLAGS=-O2 -Wall -g -MMD
 INCLUDE=-I. -I./include
 LIBDIR=-L./lib
@@ -38,8 +37,6 @@ clean:
 	rm $(MODULE_OBJS) $(MODULE_OBJS:.o=.d)
 	rm $(TARGET) $(TARGET_OBJ) $(TARGET_OBJ:.o=.d)
 
-distclean: clean
-
-docs: doxygen.config README.md LICENSE.md $(TARGET)
+docs: Doxyfile DoxygenLayout.xml README.md LICENSE.md $(TARGET)
 	@echo "Building Doxygen..."
 	doxygen ${DOXYGENCONFIG}

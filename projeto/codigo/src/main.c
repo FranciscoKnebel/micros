@@ -19,8 +19,6 @@
  * Detailed explanation.
  */
 int main() {
-  printf("Meu meninao\n.");
-
   printf("2+3=%d\n", adder(2, 3));
 
   return 0;
