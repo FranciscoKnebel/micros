@@ -112,7 +112,7 @@ int main(int argc,char * argv[])
 		
 		snprintf(str,sizeof str,"%d\n",duty_cycle);
 		pputs("/sys/class/pwm/pwmchip0/pwm1/duty_cycle",str);
-		pputs("/sys/class/pwm/pwmchip0/pwm1/enable","1");
+		pputs("/sys/class/pwm/pwmchip0/pwm1/enable","1");2
 		
 		i2c_write_reg(fd_lcd,LCD_C0,LCD_SCREENCLEAR);
 		usleep(1600);	/* Wait for more then 1.53 ms */

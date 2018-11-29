@@ -1,5 +1,5 @@
 /*
-  inttst.c: Receives an interrupt on Galileo Gen2 IO4.
+  galileo2io.h: Helper functions for Galileo I/O
   
   Copyright (c) 2016 Walter Fetter Lages <w.fetter@ieee.org>
 
@@ -22,44 +22,19 @@
 
 */
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <poll.h>
-#include <unistd.h>
+#ifndef GALILEO2IO_H
+#define GALILEO2IO_H
 
-#include <galileo2io.h>
-
-int main(int argc,char * argv[])
+#ifdef __cplusplus
+extern "C"
 {
-        unsigned char c;
-        struct pollfd pfd;
+#endif
 
-        if((pfd.fd=open("/sys/class/gpio/gpio6/value",O_RDONLY)) < 0)
-        {
-                perror("Opening gpio6:");
-                return -1;
-        }
+extern char * pgets(char *s,int size,const char path[]);
+extern int pputs(const char path[],const char s[]);
 
-        /* Clear old values */
-        read(pfd.fd,&c,1);
+#ifdef __cplusplus
+};
+#endif
 
-        pfd.events=POLLPRI;
-	
-	unsigned int interrupciones = 0;
-	for(;;) {
-	  puts("Waiting for interrupt...");
-
-	  pputs("/sys/class/gpio/gpio6/edge","both");
-
-	  poll(&pfd,1,-1);
-	  
-	  lseek(pfd.fd,0,SEEK_SET);
-	  read(pfd.fd,&c,1);
-	  
-	  pputs("/sys/class/gpio/gpio6/edge","none");
-	  printf("Interrupciones de toquito, cabron: %d\n", ++interrupciones);
-	}
-	
-        close(pfd.fd);
-        return 0;
-}
+#endif

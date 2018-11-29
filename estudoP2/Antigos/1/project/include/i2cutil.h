@@ -1,5 +1,5 @@
 /*
-  inttst.c: Receives an interrupt on Galileo Gen2 IO4.
+  i2cutil.h: I2C utility functions
   
   Copyright (c) 2016 Walter Fetter Lages <w.fetter@ieee.org>
 
@@ -22,44 +22,18 @@
 
 */
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <poll.h>
-#include <unistd.h>
+#ifndef I2CUTIL_H
+#define I2CUTIL_H
 
-#include <galileo2io.h>
-
-int main(int argc,char * argv[])
+#ifdef __cplusplus
+extern "C"
 {
-        unsigned char c;
-        struct pollfd pfd;
+#endif
 
-        if((pfd.fd=open("/sys/class/gpio/gpio6/value",O_RDONLY)) < 0)
-        {
-                perror("Opening gpio6:");
-                return -1;
-        }
+extern int i2c_write_reg(int fd,unsigned char reg,unsigned char data);
 
-        /* Clear old values */
-        read(pfd.fd,&c,1);
+#ifdef __cplusplus
+};
+#endif
 
-        pfd.events=POLLPRI;
-	
-	unsigned int interrupciones = 0;
-	for(;;) {
-	  puts("Waiting for interrupt...");
-
-	  pputs("/sys/class/gpio/gpio6/edge","both");
-
-	  poll(&pfd,1,-1);
-	  
-	  lseek(pfd.fd,0,SEEK_SET);
-	  read(pfd.fd,&c,1);
-	  
-	  pputs("/sys/class/gpio/gpio6/edge","none");
-	  printf("Interrupciones de toquito, cabron: %d\n", ++interrupciones);
-	}
-	
-        close(pfd.fd);
-        return 0;
-}
+#endif

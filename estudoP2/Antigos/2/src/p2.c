@@ -17,7 +17,7 @@
 #define ROTARY_MAX 5
 
 #define MAX_STR 80
-
+	
 #define BL_YELLOW 0x05
 
 int servo(int rotary_volts);
