@@ -10,9 +10,18 @@ $ sudo apt install doxygen
 \end{DoxyCode}
 
 \item G\+CC
+\item Make
 \end{DoxyItemize}
 
 \subsection*{Makefile}
+
+\subsubsection*{Project}
+
+
+\begin{DoxyItemize}
+\item Compile the full project with {\ttfamily make}.
+\item Clean built files with {\ttfamily make clean}.
+\end{DoxyItemize}
 
 \subsubsection*{Documentation}
 
@@ -22,7 +31,11 @@ $ doxygen
 \end{DoxyCode}
 
 
-Then you can open the {\ttfamily docs/html/index.\+html} file and search the {\ttfamily Files} section for code documentation.
+Then you can open the {\ttfamily docs/html/index.\+html} file and search the {\ttfamily Files} section for code documentation. To change the docs generation configuration, you need to install the {\ttfamily doxygen-\/gui} config and run\+: 
+\begin{DoxyCode}
+$ 
+\end{DoxyCode}
+
 
 \subsection*{Versioning}
 

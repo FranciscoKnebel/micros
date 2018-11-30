@@ -30,7 +30,7 @@ all: $(TARGET)
 $(TARGET): $(MODULE_OBJS) $(TARGET_OBJ) 
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-%.o: %.c
+%.o: %.c c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 -include $(TARGET_SRC:.c=.d)
