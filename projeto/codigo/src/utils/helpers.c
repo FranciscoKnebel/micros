@@ -1,10 +1,10 @@
 /**
  * @file helpers.c
- * @author AUTHOR NAME
- * @date 9 Sep 2012
- * @brief Brief.
+ * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
+ * @date 30 Nov 2018
+ * @brief File containing example of doxygen usage for quick reference.
  *
- * General
+ * Full description. 	
  */
 
 #include "helpers.h"

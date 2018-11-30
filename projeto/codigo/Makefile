@@ -10,6 +10,9 @@ MODULE_LIST = utils/helpers
 MODULE_SRCS = $(addsuffix .c, $(addprefix src/, ${MODULE_LIST}))
 MODULE_OBJS = $(MODULE_SRCS:.c=.o)
 
+# Build target to send compiled program
+BUILD_TARGET = galileo11
+
 DOXYGENCONFIG=Doxyfile
 FLAGS=-O2 -Wall -g -MMD
 INCLUDE=-I. -I./include
@@ -40,3 +43,6 @@ clean:
 docs: Doxyfile DoxygenLayout.xml README.md LICENSE.md $(TARGET)
 	@echo "Building Doxygen..."
 	doxygen ${DOXYGENCONFIG}
+
+send: all
+	scp main micros@$(BUILD_TARGET):
