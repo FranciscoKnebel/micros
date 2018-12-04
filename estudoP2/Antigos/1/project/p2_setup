@@ -1,0 +1,266 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          p2_setup
+# Required-Start:    
+# Should-Start:      
+# Required-Stop:     
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Configures GPIO, PWM, etc for P2
+# Description:       Configures GPIO, PWM, etc for P2
+### END INIT INFO
+
+case "$1" in
+    start|restart|force-reload)
+	### INIT INTERRUPÇOES BOTÃO - LAB 5
+
+   	# IO4 = gpio6
+	if [ ! -d /sys/class/gpio/gpio6 ] ; then
+	    echo -n "6" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio6/direction
+	chgrp gpio /sys/class/gpio/gpio6/value
+	chmod g+r /sys/class/gpio/gpio6/value
+	chgrp gpio /sys/class/gpio/gpio6/edge
+	chmod g+rw /sys/class/gpio/gpio6/edge
+
+	#gpio36 = 1 => IO4=in
+	if [ ! -d /sys/class/gpio/gpio36 ] ; then
+	    echo -n "36" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio36/direction
+	echo -n "1" > /sys/class/gpio/gpio36/value
+	#gpio36 = 1 => IO4=in
+
+	#gpio37 = 0 => pull-down
+	if [ ! -d /sys/class/gpio/gpio37 ] ; then
+	    echo -n "37" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio37/direction
+	echo -n "0" > /sys/class/gpio/gpio37/value
+	#gpio37 = 0 => pull-down
+
+	### end INTERRUPÇOES BOTÃO - LAB 5
+
+	#### INIT PWM SERVO - LAB 6
+	# IO3 = pwm1
+	if [ ! -d /sys/class/pwm/pwmchip0/pwm1 ] ; then
+	    echo -n "1" > /sys/class/pwm/pwmchip0/export
+	fi
+	chgrp pwm /sys/class/pwm/pwmchip0/device/pwm_period
+	chmod g+w /sys/class/pwm/pwmchip0/device/pwm_period
+	chgrp pwm /sys/class/pwm/pwmchip0/pwm1/duty_cycle
+	chmod g+w /sys/class/pwm/pwmchip0/pwm1/duty_cycle
+	chgrp pwm /sys/class/pwm/pwmchip0/pwm1/enable
+	chmod g+w /sys/class/pwm/pwmchip0/pwm1/enable
+
+	# gpio16 = 0 = out
+	if [ ! -d /sys/class/gpio/gpio16 ] ; then
+	    echo -n "16" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio16/direction
+	echo -n "0" > /sys/class/gpio/gpio16/value
+	# gpio16 = 0 = out
+
+        # gpio17 = in = no pull-up nor pull-down
+	if [ ! -d /sys/class/gpio/gpio17 ] ; then
+	    echo -n "17" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio17/direction
+	#gpio17 = in = no pull-up nor pull-down
+        
+        # gpio76 = 0
+	if [ ! -d /sys/class/gpio/gpio76 ] ; then
+	    echo -n "76" > /sys/class/gpio/export
+	fi
+	echo -n "0" > /sys/class/gpio/gpio76/value
+	# gpio76 = 0
+        
+        # gpio64 = 1 */
+	if [ ! -d /sys/class/gpio/gpio64 ] ; then
+	    echo -n "64" > /sys/class/gpio/export
+	fi
+	echo -n "1" > /sys/class/gpio/gpio64/value
+	# gpio64 = 1 */
+
+	#### END PWM SERVO - LAB 6
+
+	##### INIT CONVERSOR A/D, MODO "ONE-SHOT" - LAB7
+
+	#gpio49 = in = neither pull-up nor pull-down
+	if [ ! -d /sys/class/gpio/gpio49 ] ; then
+	    echo -n "49" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio49/direction
+        
+        chgrp adc /sys/bus/iio/devices/iio:device0/in_voltage0_raw
+        chmod g+r /sys/bus/iio/devices/iio:device0/in_voltage0_raw
+        chgrp adc /sys/bus/iio/devices/iio:device0/in_voltage0_scale
+        chmod g+r /sys/bus/iio/devices/iio:device0/in_voltage0_scale
+	#gpio49 = in = neither pull-up nor pull-down
+
+	##### END CONVERSOR A/D, MODO "ONE-SHOT" - LAB7
+
+	###### INIT CONVERSOR A/D, MODO "CONTINUO" - LAB7
+
+	# gpio49 = in = neither pull-up nor pull-down
+	if [ ! -d /sys/class/gpio/gpio49 ] ; then
+	    echo -n "49" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio49/direction
+
+	# gpio51 = in = neither pull-up nor pull-down
+	if [ ! -d /sys/class/gpio/gpio51 ] ; then
+	    echo -n "51" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio51/direction
+
+	# gpio53 = in = neither pull-up nor pull-down
+	if [ ! -d /sys/class/gpio/gpio53 ] ; then
+	    echo -n "53" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio53/direction
+
+	# gpio55 = in = neither pull-up nor pull-down
+	if [ ! -d /sys/class/gpio/gpio55 ] ; then
+	    echo -n "55" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio55/direction
+        
+        for i in {0..3} ; do
+        	chgrp adc /sys/bus/iio/devices/iio:device0/in_voltage"$i"_scale
+        	chmod g+r /sys/bus/iio/devices/iio:device0/in_voltage"$i"_scale
+        	
+        	chgrp adc /sys/bus/iio/devices/iio:device0/scan_elements/in_voltage"$i"_en
+		chmod g+rw /sys/bus/iio/devices/iio:device0/scan_elements/in_voltage"$i"_en
+        done;
+
+	chgrp adc /sys/bus/iio/devices/iio:device0/scan_elements/in_timestamp_en
+	chmod g+rw /sys/bus/iio/devices/iio:device0/scan_elements/in_timestamp_en
+	
+        chgrp adc /sys/bus/iio/devices/iio:device0/buffer/enable
+        chmod g+rw /sys/bus/iio/devices/iio:device0/buffer/enable
+        chgrp adc /sys/bus/iio/devices/iio:device0/buffer/length
+	chmod g+rw /sys/bus/iio/devices/iio:device0/buffer/length
+	
+        modprobe iio-trig-sysfs
+        echo -n "0" > /sys/bus/iio/devices/iio_sysfs_trigger/add_trigger
+        
+        chgrp adc /sys/bus/iio/devices/trigger0/trigger_now
+	chmod g+w /sys/bus/iio/devices/trigger0/trigger_now
+	
+	modprobe iio-trig-hrtimer
+       	echo -n "1" > /sys/bus/iio/devices/iio_hrtimer_trigger/add_trigger
+        
+        chgrp adc /sys/bus/iio/devices/trigger1/frequency
+        chmod g+rw /sys/bus/iio/devices/trigger1/frequency
+        
+        chgrp adc /sys/bus/iio/devices/iio:device0/trigger/current_trigger
+	chmod g+rw /sys/bus/iio/devices/iio:device0/trigger/current_trigger
+	
+	chgrp adc /dev/iio:device0
+	chmod g+r /dev/iio:device0
+	###### END CONVERSOR A/D, MODO "CONTINUO" - LAB7
+
+	####### INIT LCD - LAB10
+
+	# Pull-up on IO18
+	if [ ! -d /sys/class/gpio/gpio57 ] ; then
+    		echo -n "57" > /sys/class/gpio/export
+	fi	        
+	echo "out" > /sys/class/gpio/gpio57/direction
+	echo "1" > /sys/class/gpio/gpio57/value
+	 
+	# Select I2C on IO18 and IO19
+	if [ ! -d /sys/class/gpio/gpio60 ] ; then
+    		echo -n "60" > /sys/class/gpio/export
+	fi	        
+	echo "out" > /sys/class/gpio/gpio60/direction
+	echo "0" > /sys/class/gpio/gpio60/value
+
+	# Pull-up on IO19
+	if [ ! -d /sys/class/gpio/gpio59 ] ; then
+    		echo -n "59" > /sys/class/gpio/export
+	fi	        
+	echo "out" > /sys/class/gpio/gpio59/direction
+	echo "1" > /sys/class/gpio/gpio59/value
+	
+	chgrp i2c /dev/i2c-0
+	chmod g+rw /dev/i2c-0
+
+	####### END LCD - LAB10
+	
+	
+
+	;;
+    stop)
+	#init botão (interrupções) - LAB5
+    	echo -n "in" > /sys/class/gpio/gpio37/direction
+    	echo -n "37" > /sys/class/gpio/unexport
+	echo -n "36" > /sys/class/gpio/unexport
+	echo -n "6" > /sys/class/gpio/unexport
+	#end botão (interrupções) - LAB5
+	#init servo - LAB6
+	echo -n "0" > /sys/class/pwm/pwmchip0/pwm1/enable
+    	echo -n "76" > /sys/class/gpio/unexport
+        echo -n "64" > /sys/class/gpio/unexport
+	echo -n "17" > /sys/class/gpio/unexport
+	echo -n "1" > /sys/class/gpio/gpio16/value
+	echo -n "16" > /sys/class/gpio/unexport
+	echo -n "1" > /sys/class/pwm/pwmchip0/unexport
+	#end servo - LAB6
+	#init conversor A/D modo ONE-SHOT, LAB7
+	echo -n "49" > /sys/class/gpio/unexport
+	#end conversor A/D modo ONE-SHOT, LAB7
+	#init conversor A/D modo CONTINUO, LAB7
+	echo "\n" > /sys/bus/iio/devices/iio:device0/trigger/current_trigger
+
+	echo -n "1" > /sys/bus/iio/devices/iio_hrtimer_trigger/remove_trigger
+	rmmod iio-trig-hrtimer
+	echo -n "0" > /sys/bus/iio/devices/iio_sysfs_trigger/remove_trigger
+	rmmod iio-trig-sysfs
+	
+	echo -n "49" > /sys/class/gpio/unexport
+	echo -n "51" > /sys/class/gpio/unexport
+	echo -n "53" > /sys/class/gpio/unexport
+	echo -n "55" > /sys/class/gpio/unexport
+	#end conversor A/D modo CONTINUO, LAB7
+
+	#init LCD, LAB10
+	# No pull-up on IO18
+	echo "in" > /sys/class/gpio/gpio57/direction
+	ecbo "57" > /sys/class/gpio/unexport
+
+	# GPIO on IO18 and IO19
+	echo "1" > /sys/class/gpio/gpio60/value
+	echo "60" > /sys/class/gpio/unexport
+   
+	# No pull-up on  IO19 
+	echo "in" > /sys/class/gpio/gpio59/direction
+	echo "59" > /sys/class/gpio/unexport
+	#end LCD, LAB10
+	;;
+    status)
+	#init GPIO 
+    	ls -d /sys/class/gpio/gpio*
+	#end GPIO
+	#init SERVO
+	echo -n Period:
+    	cat /sys/class/pwm/pwmchip0/device/pwm_period
+    	echo -n Duty Cicle:
+    	cat /sys/class/pwm/pwmchip0/pwm1/duty_cycle
+    	echo -n Enable:
+    	cat /sys/class/pwm/pwmchip0/pwm1/enable
+	#end SERVO
+	#init CONVERSOR A/D CONTINUO
+	cat /sys/bus/iio/devices/iio:device0/trigger/current_trigger
+	#end CONVERSOR A/D CONTINUO
+	;;
+    *)
+	echo -n "Usage: $0 " 
+	echo "{start|stop|restart|force-reload|status}"
+	exit 1
+	;;
+esac
+
+exit 0
