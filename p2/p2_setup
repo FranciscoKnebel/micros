@@ -1,0 +1,302 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          p2_setup
+# Required-Start:    
+# Should-Start:      
+# Required-Stop:     
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Configures GPIO, PWM, etc for P2
+# Description:       Configures GPIO, PWM, etc for P2
+### END INIT INFO
+
+case "$1" in
+    start|restart|force-reload)
+	### INIT INTERRUPÇÕES transmissor - ACK (IO6) & receptor - CLK (IO2)
+
+  # IO6 = gpio1 = interrupção - ACK
+	if [ ! -d /sys/class/gpio/gpio1 ] ; then
+	    echo -n "1" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio1/direction
+	chgrp gpio /sys/class/gpio/gpio1/value
+	chmod g+r /sys/class/gpio/gpio1/value
+	chgrp gpio /sys/class/gpio/gpio1/edge
+	chmod g+rw /sys/class/gpio/gpio1/edge
+
+  # IO2 = gpio13 = interrupção - CLK
+	if [ ! -d /sys/class/gpio/gpio13 ] ; then
+	    echo -n "13" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio13/direction
+	chgrp gpio /sys/class/gpio/gpio13/value
+	chmod g+r /sys/class/gpio/gpio13/value
+	chgrp gpio /sys/class/gpio/gpio13/edge
+	chmod g+rw /sys/class/gpio/gpio13/edge
+
+	#gpio20 = 1 => IO6=in
+	if [ ! -d /sys/class/gpio/gpio20 ] ; then
+	    echo -n "20" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio20/direction
+	echo -n "1" > /sys/class/gpio/gpio20/value
+
+	#gpio21 = 0 => pull-down
+	if [ ! -d /sys/class/gpio/gpio21 ] ; then
+	    echo -n "21" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio21/direction
+	echo -n "0" > /sys/class/gpio/gpio21/value
+
+  # gpio68 = 0
+	if [ ! -d /sys/class/gpio/gpio68 ] ; then
+	    echo -n "68" > /sys/class/gpio/export
+	fi
+	echo -n "0" > /sys/class/gpio/gpio68/value
+        
+  #gpio34 = 1 => IO2=in
+	if [ ! -d /sys/class/gpio/gpio34 ] ; then
+	    echo -n "34" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio34/direction
+	echo -n "1" > /sys/class/gpio/gpio34/value
+
+	#gpio35 = 0 => pull-down
+	if [ ! -d /sys/class/gpio/gpio35 ] ; then
+	    echo -n "35" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio35/direction
+	echo -n "0" > /sys/class/gpio/gpio35/value
+
+  # gpio77 = 0
+	if [ ! -d /sys/class/gpio/gpio77 ] ; then
+	    echo -n "77" > /sys/class/gpio/export
+	fi
+	echo -n "0" > /sys/class/gpio/gpio77/value
+        
+	### END INTERRUPÇÕES transmissor - ACK (IO6) & receptor - CLK (IO2)
+
+  #### INIT IO4 (RECEPTOR) = DATA & IO5 (TRANSMISSOR) = DATA
+  # IO4 = gpio6 - DATA
+	if [ ! -d /sys/class/gpio/gpio6 ] ; then
+	    echo -n "6" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio6/direction
+	chgrp gpio /sys/class/gpio/gpio6/value
+	chmod g+r /sys/class/gpio/gpio6/value
+	chgrp gpio /sys/class/gpio/gpio6/edge
+	chmod g+rw /sys/class/gpio/gpio6/edge
+
+  # IO5 = gpio0 - DATA
+	if [ ! -d /sys/class/gpio/gpio0 ] ; then
+	    echo -n "0" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio0/direction
+	chgrp gpio /sys/class/gpio/gpio0/value
+	chmod g+r /sys/class/gpio/gpio0/value
+	chgrp gpio /sys/class/gpio/gpio0/edge
+	chmod g+rw /sys/class/gpio/gpio0/edge
+
+  #gpio36 = 1 => IO4=in
+	if [ ! -d /sys/class/gpio/gpio36 ] ; then
+	    echo -n "36" > /sys/class/gpio/export
+	fi
+  ################# aqui era out (???)
+	echo -n "in" > /sys/class/gpio/gpio36/direction
+	echo -n "1" > /sys/class/gpio/gpio36/value
+
+	#gpio37 = 0 => pull-down
+	if [ ! -d /sys/class/gpio/gpio37 ] ; then
+	    echo -n "37" > /sys/class/gpio/export
+	fi
+    ################# aqui era out (???)
+	echo -n "in" > /sys/class/gpio/gpio37/direction
+	echo -n "0" > /sys/class/gpio/gpio37/value
+
+  #gpio18 = 0 => IO5=out
+	if [ ! -d /sys/class/gpio/gpio18 ] ; then
+	    echo -n "18" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio18/direction
+	echo -n "0" > /sys/class/gpio/gpio18/value
+
+	#gpio19 = 0 => pull-down
+	if [ ! -d /sys/class/gpio/gpio19 ] ; then
+	    echo -n "19" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio19/direction
+	echo -n "0" > /sys/class/gpio/gpio19/value
+
+  # gpio66 = 0
+	if [ ! -d /sys/class/gpio/gpio66 ] ; then
+	    echo -n "66" > /sys/class/gpio/export
+	fi
+	echo -n "0" > /sys/class/gpio/gpio66/value
+        
+  #### END IO4 (RECEPTOR) = DATA & IO5 (TRANSMISSOR) = DATA 
+
+  ##### INIT IO7 (TRANSMISSOR) = CLK
+  # IO7 = gpio38 - CLK
+	if [ ! -d /sys/class/gpio/gpio38 ] ; then
+	    echo -n "38" > /sys/class/gpio/export
+	fi
+  ################# aqui era in (???)
+	echo -n "out" > /sys/class/gpio/gpio38/direction
+	chgrp gpio /sys/class/gpio/gpio38/value
+	chmod g+rw /sys/class/gpio/gpio38/value
+	chgrp gpio /sys/class/gpio/gpio38/edge
+	chmod g+rw /sys/class/gpio/gpio38/edge
+
+  #gpio39 = 0 => pull-down
+	if [ ! -d /sys/class/gpio/gpio39 ] ; then
+	    echo -n "39" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio39/direction
+	echo -n "0" > /sys/class/gpio/gpio39/value
+
+  ##### END IO7 (TRANSMISSOR) = CLK
+
+  ###### INIT IO3 (RECEPTOR) = ACK
+  # IO3 = gpio14 - ACK
+	if [ ! -d /sys/class/gpio/gpio14 ] ; then
+	    echo -n "14" > /sys/class/gpio/export
+	fi
+    ################# aqui era in (???)
+	echo -n "out" > /sys/class/gpio/gpio14/direction
+	chgrp gpio /sys/class/gpio/gpio14/value
+	chmod g+rw /sys/class/gpio/gpio14/value
+	chgrp gpio /sys/class/gpio/gpio14/edge
+	chmod g+rw /sys/class/gpio/gpio14/edge
+
+  #gpio16 = 0 => IO3=out
+	if [ ! -d /sys/class/gpio/gpio16 ] ; then
+	    echo -n "16" > /sys/class/gpio/export
+	fi
+    ################# aqui era in (???)
+	echo -n "out" > /sys/class/gpio/gpio16/direction
+	echo -n "0" > /sys/class/gpio/gpio16/value
+
+	#gpio17 = 0 => pull-down
+	if [ ! -d /sys/class/gpio/gpio17 ] ; then
+	    echo -n "17" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio17/direction
+	echo -n "0" > /sys/class/gpio/gpio17/value
+
+  # gpio76 = 0
+	if [ ! -d /sys/class/gpio/gpio76 ] ; then
+	    echo -n "76" > /sys/class/gpio/export
+	fi
+	echo -n "0" > /sys/class/gpio/gpio76/value
+        
+  # gpio64 = 0 */
+	if [ ! -d /sys/class/gpio/gpio64 ] ; then
+	    echo -n "64" > /sys/class/gpio/export
+	fi
+	echo -n "0" > /sys/class/gpio/gpio64/value
+
+  ###### END IO3 (TRANSMISSOR) = ACK
+	
+	
+	####### INIT LCD
+
+	# Pull-up on IO18
+	if [ ! -d /sys/class/gpio/gpio57 ] ; then
+    		echo -n "57" > /sys/class/gpio/export
+	fi	        
+	echo "out" > /sys/class/gpio/gpio57/direction
+	echo "1" > /sys/class/gpio/gpio57/value
+	 
+	# Select I2C on IO18 and IO19
+	if [ ! -d /sys/class/gpio/gpio60 ] ; then
+    		echo -n "60" > /sys/class/gpio/export
+	fi	        
+	echo "out" > /sys/class/gpio/gpio60/direction
+	echo "0" > /sys/class/gpio/gpio60/value
+
+	# Pull-up on IO19
+	if [ ! -d /sys/class/gpio/gpio59 ] ; then
+    		echo -n "59" > /sys/class/gpio/export
+	fi	        
+	echo "out" > /sys/class/gpio/gpio59/direction
+	echo "1" > /sys/class/gpio/gpio59/value
+	
+	chgrp i2c /dev/i2c-0
+	chmod g+rw /dev/i2c-0
+
+	####### END LCD
+	
+	
+
+	;;
+    stop)
+	#init INTERRUPÇÕES
+
+  echo -n "in" > /sys/class/gpio/gpio21/direction
+  echo -n "21" > /sys/class/gpio/unexport
+  echo -n "20" > /sys/class/gpio/unexport
+  echo -n "1" > /sys/class/gpio/unexport
+
+  echo -n "in" > /sys/class/gpio/gpio35/direction
+  echo -n "35" > /sys/class/gpio/unexport
+  echo -n "34" > /sys/class/gpio/unexport
+  echo -n "13" > /sys/class/gpio/unexport
+
+	#end INTERRUPÇÕES
+
+  # INIT RESTO
+  echo -n "in" > /sys/class/gpio/gpio17/direction
+  echo -n "17" > /sys/class/gpio/unexport
+  echo -n "16" > /sys/class/gpio/unexport
+  echo -n "14" > /sys/class/gpio/unexport
+
+  echo -n "in" > /sys/class/gpio/gpio37/direction
+  echo -n "37" > /sys/class/gpio/unexport
+  echo -n "36" > /sys/class/gpio/unexport
+  echo -n "16" > /sys/class/gpio/unexport
+
+  echo -n "in" > /sys/class/gpio/gpio19/direction
+  echo -n "19" > /sys/class/gpio/unexport
+  echo -n "18" > /sys/class/gpio/unexport
+  echo -n "0" > /sys/class/gpio/unexport
+
+  echo -n "in" > /sys/class/gpio/gpio39/direction
+  echo -n "39" > /sys/class/gpio/unexport
+  echo -n "38" > /sys/class/gpio/unexport
+
+  echo -n "76" > /sys/class/gpio/unexport
+  echo -n "64" > /sys/class/gpio/unexport
+  echo -n "77" > /sys/class/gpio/unexport
+  echo -n "66" > /sys/class/gpio/unexport
+  echo -n "68" > /sys/class/gpio/unexport
+  #END RESTO
+
+	#init LCD
+
+	# No pull-up on IO18
+	echo "in" > /sys/class/gpio/gpio57/direction
+	echo "57" > /sys/class/gpio/unexport
+
+	# GPIO on IO18 and IO19
+	echo "1" > /sys/class/gpio/gpio60/value
+	echo "60" > /sys/class/gpio/unexport
+   
+	# No pull-up on  IO19 
+	echo "in" > /sys/class/gpio/gpio59/direction
+	echo "59" > /sys/class/gpio/unexport
+
+	#end LCD
+	;;
+    status)
+	#init GPIO 
+    	ls -d /sys/class/gpio/gpio*
+	#end GPIO
+	;;
+    *)
+	echo -n "Usage: $0 " 
+	echo "{start|stop|restart|force-reload|status}"
+	exit 1
+	;;
+esac
+
+exit 0
