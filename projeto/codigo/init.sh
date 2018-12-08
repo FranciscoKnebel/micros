@@ -1,7 +1,10 @@
 ## IO2  = INPUT S_ELB1
 ## IO3  = INPUT S_ELB2
+## IO9  = INPUT S_SH1
+## IO5  = PWM3
+## IO6  = INPUT S_SH2
 ## IO7  = OUTPUT H ENABLE
-## IO5  = PWM3 
+## IO8  = OUTPUT CNT_EN
 ## IO10 = SPI #SS
 ## IO11 = SPI MOSI
 ## IO12 = SPI MISO
@@ -66,6 +69,57 @@ case "$1" in
 	    echo -n "64" > /sys/class/gpio/export
 	fi
 	echo -n "0" > /sys/class/gpio/gpio64/value
+	
+	## IO9 = INPUT S_SH1
+	if [ ! -d /sys/class/gpio/gpio4 ] ; then
+	    echo -n "4" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio4/direction
+	chgrp trab /sys/class/gpio/gpio4/value
+	chmod g+r /sys/class/gpio/gpio4/value
+	# gpio22 = 1  = out
+	if [ ! -d /sys/class/gpio/gpio22 ] ; then
+	    echo -n "22" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio22/direction
+	echo -n "1" > /sys/class/gpio/gpio22/value
+	# gpio23 = 0 = out = pull-down resistor
+	if [ ! -d /sys/class/gpio/gpio23 ] ; then
+	    echo -n "23" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio23/direction
+	echo -n "0" > /sys/class/gpio/gpio23/value
+	# gpio70 = 0
+	if [ ! -d /sys/class/gpio/gpio70 ] ; then
+	    echo -n "70" > /sys/class/gpio/export
+	fi
+	echo -n "0" > /sys/class/gpio/gpio70/value
+	
+	## IO6 = INPUT S_SH2
+	if [ ! -d /sys/class/gpio/gpio4 ] ; then
+	    echo -n "1" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio1/direction
+	chgrp trab /sys/class/gpio/gpio1/value
+	chmod g+r /sys/class/gpio/gpio1/value
+	# gpio20 = 1  = out
+	if [ ! -d /sys/class/gpio/gpio20 ] ; then
+	    echo -n "20" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio20/direction
+	echo -n "1" > /sys/class/gpio/gpio20/value
+	# gpio21 = 0 = out = pull-down resistor
+	if [ ! -d /sys/class/gpio/gpio21 ] ; then
+	    echo -n "21" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio21/direction
+	echo -n "0" > /sys/class/gpio/gpio21/value
+	# gpio68 = 0
+	if [ ! -d /sys/class/gpio/gpio68 ] ; then
+	    echo -n "68" > /sys/class/gpio/export
+	fi
+	echo -n "0" > /sys/class/gpio/gpio68/value
+
     
     ### H ENABLE
     ## IO7 = OUTPUT H ENABLE
@@ -81,6 +135,21 @@ case "$1" in
 	    echo -n "39" > /sys/class/gpio/export
 	fi
 	echo -n "in" > /sys/class/gpio/gpio39/direction
+	
+	  
+    ## IO8 = OUTPUT CNT_EN
+    if [ ! -d /sys/class/gpio/gpio40 ] ; then
+	    echo -n "40" > /sys/class/gpio/export
+	fi
+	echo -n "out" > /sys/class/gpio/gpio40/direction
+	echo -n "0" > /sys/class/gpio/gpio40/value
+	chgrp trab /sys/class/gpio/gpio40/value
+	chmod g+r /sys/class/gpio/gpio40/value
+	# gpio41 = in = no pull-up nor pull-down resistor
+	if [ ! -d /sys/class/gpio/gpio41 ] ; then
+	    echo -n "41" > /sys/class/gpio/export
+	fi
+	echo -n "in" > /sys/class/gpio/gpio41/direction
 
     ### PWM 
     ## IO5 = PWM3 
@@ -214,10 +283,23 @@ case "$1" in
 	echo -n "17" > /sys/class/gpio/unexport
 	echo -n "76" > /sys/class/gpio/unexport
 	echo -n "64" > /sys/class/gpio/unexport
+	
+	echo -n "1" > /sys/class/gpio/unexport
+	echo -n "20" > /sys/class/gpio/unexport
+	echo -n "21" > /sys/class/gpio/unexport
+	echo -n "68" > /sys/class/gpio/unexport
+	echo -n "4" > /sys/class/gpio/unexport
+	echo -n "22" > /sys/class/gpio/unexport
+	echo -n "23" > /sys/class/gpio/unexport
+	echo -n "70" > /sys/class/gpio/unexport
 
     #H ENABLE
     echo -n "38" > /sys/class/gpio/unexport
 	echo -n "39" > /sys/class/gpio/unexport
+	
+	#CNT_EN
+    echo -n "40" > /sys/class/gpio/unexport
+	echo -n "41" > /sys/class/gpio/unexport
 
     #PWM 
     echo -n "0" > /sys/class/pwm/pwmchip0/pwm3/enable
