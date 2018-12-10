@@ -7,6 +7,6 @@
 int pwm_enable();
 int pwm_disable();
 int pwm_set_period(int period);
-int pwm_set_duty_cycle(int duty_cycle);
+int pwm_set_duty_cycle(int pwm_set_duty_cycle);
 
 #endif

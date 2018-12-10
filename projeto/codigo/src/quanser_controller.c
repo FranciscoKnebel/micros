@@ -27,7 +27,7 @@ int main(int argc, char* argv[]){
 	decoder_init();
 	last_count = decoder_read_counter();
 
-	while(1){
+	while(1) {
 		usleep(TIME_STEP);
 
 		int current_count = decoder_read_counter();
@@ -43,8 +43,8 @@ int main(int argc, char* argv[]){
 
 		pwm_set_period(PWM_PERIOD);
 		pwm_enable();
-        duty_cycle = (relative_speed + 1) * PWM_PERIOD / 2;
-    	pwm_set_duty_cycle(duty_cycle);
+		duty_cycle = (relative_speed + 1) * PWM_PERIOD / 2;
+		pwm_set_duty_cycle(duty_cycle);
 		pwm_disable();
 		printf("New relative speed: %f (%f)\n", relative_speed, angular_position);
 

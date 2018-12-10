@@ -1,13 +1,13 @@
 # Main target program
-TARGET = main
+TARGET = quanser_controller
 TARGET_SRC = src/$(TARGET).c
 TARGET_OBJ = $(TARGET_SRC:.c=.o)
 
 # List of module files
 # MODULE_LIST contains the space-separated module list.
-# MODULE_SRCS contains the MODULE_LIST items with .c suffix and src/ prefix.
-MODULE_LIST = utils/helpers
-MODULE_SRCS = $(addsuffix .c, $(addprefix src/, ${MODULE_LIST}))
+# MODULE_SRCS contains the MODULE_LIST items with .c suffix and src/modules prefix.
+MODULE_LIST = decoder pwm spi
+MODULE_SRCS = $(addsuffix .c, $(addprefix src/modules/, ${MODULE_LIST}))
 MODULE_OBJS = $(MODULE_SRCS:.c=.o)
 
 # Build target to send compiled program
@@ -16,12 +16,13 @@ BUILD_TARGET = galileo11
 DOXYGENCONFIG=Doxyfile
 FLAGS=-O2 -Wall -g -MMD
 INCLUDE=-I. -I./include
-LIBDIR=-L./lib
-LIBS=
+LIB_DIR=-L./lib
+LIB_LIST=galileo2
+LIBS=$(addprefix -l, ${LIB_LIST})
 
 CC=$(CROSS_COMPILE)gcc
 CFLAGS=$(FLAGS) $(INCLUDE)
-LDFLAGS=$(LIBDIR) $(LIBS)
+LDFLAGS=$(LIB_DIR) $(LIBS)
 
 .PHONY: all
 all: $(TARGET)
@@ -37,8 +38,7 @@ $(TARGET): $(MODULE_OBJS) $(TARGET_OBJ)
 
 clean:
 	rm -f *~ *.bak
-	rm $(MODULE_OBJS) $(MODULE_OBJS:.o=.d)
-	rm $(TARGET) $(TARGET_OBJ) $(TARGET_OBJ:.o=.d)
+	rm src/**/*.d src/**/*.o
 
 docs: Doxyfile DoxygenLayout.xml README.md LICENSE.md $(TARGET)
 	@echo "Building Doxygen..."
