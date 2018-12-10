@@ -1,56 +1,71 @@
+/**
+ * @file quanser_controller.c
+ * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
+ * @date 30 Nov 2018
+ * @brief File containing example of doxygen usage for quick reference.
+ */
+
 #include <quanser_controller.h>
 
-int main(int argc, char* argv[]){
-    float angular_position = 0;
-	float reference_angular_position = 0;
-	float count_angle_constant = 1e-3;
-	float kp = 0, ki = 0, kd = 0;
-    float error = 0;
-    int duty_cycle = 0;
-    float integral_error = 0, derivative_error = 0, last_error = 0;
-	int last_count = 0;
+/**
+ * @brief Use brief, otherwise the index won't have a brief explanation.
+ *
+ * Detailed explanation.
+ */
+int main(int argc, char *argv[]) {
+  float angular_position = 0;
+  float reference_angular_position = 0;
+  float count_angle_constant = 1e-3;
+  float kp = 0, ki = 0, kd = 0;
+  float error = 0;
+  int duty_cycle = 0;
+  float integral_error = 0, derivative_error = 0, last_error = 0;
+  int last_count = 0;
 
-    if(argc < 5){
-		fprintf(stderr, "Usage: ./quanser_controller <reference_angular_position> <p_gain> <i_gain> <d_gain> [<count_angle_constant>]");
-		exit(1);
-	}
-    sscanf(argv[1], "%f", &reference_angular_position);
-    sscanf(argv[2], "%f", &kp);
-    sscanf(argv[3], "%f", &ki);
-    sscanf(argv[4], "%f", &kd);
+  if (argc < 5) {
+    fprintf(stderr, "Usage: ./quanser_controller <reference_angular_position> "
+                    "<p_gain> <i_gain> <d_gain> [<count_angle_constant>]");
+    exit(1);
+  }
 
-	if(argc > 5){
-		sscanf(argv[5], "%f", &count_angle_constant);
-	}
+  sscanf(argv[1], "%f", &reference_angular_position);
+  sscanf(argv[2], "%f", &kp);
+  sscanf(argv[3], "%f", &ki);
+  sscanf(argv[4], "%f", &kd);
 
-	spi_init();
-	decoder_init();
-	last_count = decoder_read_counter();
+  if (argc > 5) {
+    sscanf(argv[5], "%f", &count_angle_constant);
+  }
 
-	while(1) {
-		usleep(TIME_STEP);
+  spi_init();
+  decoder_init();
+  last_count = decoder_read_counter();
 
-		int current_count = decoder_read_counter();
-		int delta_count = current_count - last_count;
+  while (1) {
+    usleep(TIME_STEP);
 
-		angular_position = angular_position + (count_angle_constant * delta_count);
+    int current_count = decoder_read_counter();
+    int delta_count = current_count - last_count;
 
-		error = reference_angular_position - angular_position;
-		integral_error = integral_error + error * TIME_STEP;
-		derivative_error = (error - last_error)/TIME_STEP;
+    angular_position = angular_position + (count_angle_constant * delta_count);
 
-		double relative_speed = kp * error + ki * integral_error + kd * derivative_error;
+    error = reference_angular_position - angular_position;
+    integral_error = integral_error + error * TIME_STEP;
+    derivative_error = (error - last_error) / TIME_STEP;
 
-		pwm_set_period(PWM_PERIOD);
-		pwm_enable();
-		duty_cycle = (relative_speed + 1) * PWM_PERIOD / 2;
-		pwm_set_duty_cycle(duty_cycle);
-		pwm_disable();
-		printf("New relative speed: %f (%f)\n", relative_speed, angular_position);
+    double relative_speed =
+        kp * error + ki * integral_error + kd * derivative_error;
 
-		last_count = current_count;
-		last_error = error;
-	}
+    pwm_set_period(PWM_PERIOD);
+    pwm_enable();
+    duty_cycle = (relative_speed + 1) * PWM_PERIOD / 2;
+    pwm_set_duty_cycle(duty_cycle);
+    pwm_disable();
+    printf("New relative speed: %f (%f)\n", relative_speed, angular_position);
 
-	spi_end();
+    last_count = current_count;
+    last_error = error;
+  }
+
+  spi_end();
 }

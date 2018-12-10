@@ -3,5 +3,6 @@
     "cstdio": "cpp",
     "fcntl.h": "c",
     "jhdlcd.h": "c"
-  }
+  },
+  "editor.tabSize": 2
 }

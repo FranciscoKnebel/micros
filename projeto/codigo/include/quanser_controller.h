@@ -1,3 +1,10 @@
+/**
+ * @file quanser_controller.h
+ * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
+ * @date 30 Nov 2018
+ * @brief File containing example of doxygen usage for quick reference.
+ */
+
 #ifndef QUANSER_CONTROLLER_H
 #define QUANSER_CONTROLLER_H
 

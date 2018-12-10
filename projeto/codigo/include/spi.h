@@ -1,3 +1,10 @@
+/**
+ * @file spi.h
+ * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
+ * @date 30 Nov 2018
+ * @brief File containing example of doxygen usage for quick reference.
+ */
+
 #ifndef SPI_H_
 #define SPI_H_
 
