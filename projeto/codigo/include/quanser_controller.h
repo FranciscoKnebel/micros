@@ -3,9 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <pwm.h>
-#include <motor.h>
 #include <unistd.h>
+#include <decoder.h>
+#include <spi.h>
+#include <pwm.h>
 
 #define TIME_STEP 10000
 #define PWM_PERIOD 1500000

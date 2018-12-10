@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <decoder.h>
-#include <pwm.h>
-#include <motor.h>
-#include <unistd.h>
+#include <quanser_controller.h>
 
 int main(int argc, char* argv[]){
     float angular_position = 0;
@@ -27,11 +22,11 @@ int main(int argc, char* argv[]){
 	if(argc > 5){
 		sscanf(argv[5], "%f", &count_angle_constant);
 	}
-/*
+
 	spi_init();
 	decoder_init();
-	int last_count = decoder_read_counter();
-	*/
+	last_count = decoder_read_counter();
+
 	while(1){
 		usleep(TIME_STEP);
 
@@ -41,7 +36,7 @@ int main(int argc, char* argv[]){
 		angular_position = angular_position + (count_angle_constant * delta_count);
 
 		error = reference_angular_position - angular_position;
-		integral_error = integral + error * TIME_STEP;
+		integral_error = integral_error + error * TIME_STEP;
 		derivative_error = (error - last_error)/TIME_STEP;
 
 		double relative_speed = kp * error + ki * integral_error + kd * derivative_error;
@@ -57,5 +52,5 @@ int main(int argc, char* argv[]){
 		last_error = error;
 	}
 
-	spi_finalize();
+	spi_end();
 }
