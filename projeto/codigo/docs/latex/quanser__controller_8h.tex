@@ -35,8 +35,9 @@ File containing example of doxygen usage for quick reference.
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{quanser__controller_8h_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
-\begin{DoxyCompactList}\small\item\em Use brief, otherwise the index won\textquotesingle{}t have a brief explanation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\Hypertarget{quanser__controller_8h_a0ddf1224851353fc92bfbff6f499fa97}\label{quanser__controller_8h_a0ddf1224851353fc92bfbff6f499fa97}} 
+int {\bfseries main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -48,82 +49,3 @@ Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
 \begin{DoxyDate}{Date}
 30 Nov 2018 
 \end{DoxyDate}
-
-
-\subsection{Function Documentation}
-\mbox{\Hypertarget{quanser__controller_8h_a0ddf1224851353fc92bfbff6f499fa97}\label{quanser__controller_8h_a0ddf1224851353fc92bfbff6f499fa97}} 
-\index{quanser\+\_\+controller.\+h@{quanser\+\_\+controller.\+h}!main@{main}}
-\index{main@{main}!quanser\+\_\+controller.\+h@{quanser\+\_\+controller.\+h}}
-\subsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
-
-
-
-Use brief, otherwise the index won\textquotesingle{}t have a brief explanation. 
-
-Detailed explanation. 
-
-Definition at line 31 of file quanser\+\_\+controller.\+c.
-
-
-\begin{DoxyCode}
-32 \{
-33   \textcolor{keywordtype}{float} angular\_position = 0;
-34   \textcolor{keywordtype}{float} reference\_angular\_position = 0;
-35   \textcolor{keywordtype}{float} count\_angle\_constant = 1e-3;
-36   \textcolor{keywordtype}{float} kp = 0, ki = 0, kd = 0;
-37   \textcolor{keywordtype}{float} error = 0;
-38   \textcolor{keywordtype}{int} duty\_cycle = 0;
-39   \textcolor{keywordtype}{float} integral\_error = 0, derivative\_error = 0, last\_error = 0;
-40   \textcolor{keywordtype}{int} last\_count = 0;
-41 
-42   \textcolor{keywordflow}{if} (argc < 5)
-43   \{
-44     fprintf(stderr, \textcolor{stringliteral}{"Usage: ./quanser\_controller <reference\_angular\_position> "}
-45                     \textcolor{stringliteral}{"<p\_gain> <i\_gain> <d\_gain> [<count\_angle\_constant>]"});
-46     exit(1);
-47   \}
-48 
-49   sscanf(argv[1], \textcolor{stringliteral}{"%f"}, &reference\_angular\_position);
-50   sscanf(argv[2], \textcolor{stringliteral}{"%f"}, &kp);
-51   sscanf(argv[3], \textcolor{stringliteral}{"%f"}, &ki);
-52   sscanf(argv[4], \textcolor{stringliteral}{"%f"}, &kd);
-53 
-54   \textcolor{keywordflow}{if} (argc > 5)
-55   \{
-56     sscanf(argv[5], \textcolor{stringliteral}{"%f"}, &count\_angle\_constant);
-57   \}
-58 
-59   \hyperlink{spi_8c_a24d546e9f58c3777040725d7e1e23cfd}{spi\_init}();
-60   \hyperlink{decoder_8c_afd37cc07b87fa017a3d67cd5738f7004}{decoder\_init}();
-61   last\_count = \hyperlink{decoder_8c_af5454ed70b39ad9b515fdb01b4903553}{decoder\_read\_counter}();
-62 
-63   \textcolor{keywordflow}{while} (1) \{
-64     usleep(TIME\_STEP);
-65 
-66     \textcolor{keywordtype}{int} current\_count = \hyperlink{decoder_8c_af5454ed70b39ad9b515fdb01b4903553}{decoder\_read\_counter}();
-67     \textcolor{keywordtype}{int} delta\_count = current\_count - last\_count;
-68 
-69     angular\_position = angular\_position + (count\_angle\_constant * delta\_count);
-70 
-71     error = reference\_angular\_position - angular\_position;
-72     integral\_error = integral\_error + error * TIME\_STEP;
-73     derivative\_error = (error - last\_error) / TIME\_STEP;
-74 
-75     \textcolor{keywordtype}{double} relative\_speed =
-76         kp * error + ki * integral\_error + kd * derivative\_error;
-77 
-78     \hyperlink{pwm_8c_a3c0ecab2a673445e6f7e951c48715ece}{pwm\_set\_period}(PWM\_PERIOD);
-79     \hyperlink{pwm_8c_a28a132858465a2b1d46a46fd179cb19a}{pwm\_enable}();
-80     duty\_cycle = (relative\_speed + 1) * PWM\_PERIOD / 2;
-81     \hyperlink{pwm_8c_a6c03260b8f1c7e3e29bce77750fe0143}{pwm\_set\_duty\_cycle}(duty\_cycle);
-82     \hyperlink{pwm_8c_abc718f6835b4c01682047af9ddea9f9b}{pwm\_disable}();
-83     printf(\textcolor{stringliteral}{"New relative speed: %f (%f)\(\backslash\)n"}, relative\_speed, angular\_position);
-84 
-85     last\_count = current\_count;
-86     last\_error = error;
-87   \}
-88 
-89   \hyperlink{spi_8c_ac54b0dcdb1c3c7f2c652639ddebb58ce}{spi\_close}();
-90 \}
-\end{DoxyCode}

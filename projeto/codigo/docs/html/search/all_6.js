@@ -1,12 +1,10 @@
 var searchData=
 [
-  ['quansershield',['QuanserShield',['../index.html',1,'']]],
-  ['quanser_5fcontroller_2ec',['quanser_controller.c',['../quanser__controller_8c.html',1,'']]],
-  ['quanser_5fcontroller_2eh',['quanser_controller.h',['../quanser__controller_8h.html',1,'']]],
-  ['quanser_5felbow_2ec',['quanser_elbow.c',['../quanser__elbow_8c.html',1,'']]],
-  ['quanser_5felbow_2eh',['quanser_elbow.h',['../quanser__elbow_8h.html',1,'']]],
-  ['quanser_5fmotor_2ec',['quanser_motor.c',['../quanser__motor_8c.html',1,'']]],
-  ['quanser_5fmotor_2eh',['quanser_motor.h',['../quanser__motor_8h.html',1,'']]],
-  ['quanser_5fpwm_2ec',['quanser_pwm.c',['../quanser__pwm_8c.html',1,'']]],
-  ['quanser_5fpwm_2eh',['quanser_pwm.h',['../quanser__pwm_8h.html',1,'']]]
+  ['send_5ferror',['send_error',['../spi_8c.html#a80663046affbac79e2fd323f20b9c0cd',1,'send_error(const char *s):&#160;spi.c'],['../spi_8h.html#a80663046affbac79e2fd323f20b9c0cd',1,'send_error(const char *s):&#160;spi.c']]],
+  ['spi_2ec',['spi.c',['../spi_8c.html',1,'']]],
+  ['spi_2eh',['spi.h',['../spi_8h.html',1,'']]],
+  ['spi_5fclose',['spi_close',['../spi_8c.html#ac54b0dcdb1c3c7f2c652639ddebb58ce',1,'spi_close():&#160;spi.c'],['../spi_8h.html#ac54b0dcdb1c3c7f2c652639ddebb58ce',1,'spi_close():&#160;spi.c']]],
+  ['spi_5finit',['spi_init',['../spi_8c.html#a24d546e9f58c3777040725d7e1e23cfd',1,'spi_init():&#160;spi.c'],['../spi_8h.html#a24d546e9f58c3777040725d7e1e23cfd',1,'spi_init():&#160;spi.c']]],
+  ['spi_5fstat',['spi_stat',['../spi_8c.html#a07b8880e4c0569d3ce8c5753ab857dc6',1,'spi_stat():&#160;spi.c'],['../spi_8h.html#a07b8880e4c0569d3ce8c5753ab857dc6',1,'spi_stat():&#160;spi.c']]],
+  ['spi_5ftransfer',['spi_transfer',['../spi_8c.html#aa97f8a540b00bcfe195c41aa99945e12',1,'spi_transfer(uint8_t *tx, uint8_t *rx):&#160;spi.c'],['../spi_8h.html#aa97f8a540b00bcfe195c41aa99945e12',1,'spi_transfer(uint8_t *tx, uint8_t *rx):&#160;spi.c']]]
 ];
