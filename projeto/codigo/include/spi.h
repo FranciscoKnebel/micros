@@ -18,10 +18,9 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 
-void pabort(const char *s);
+void send_error(const char *s);
 int spi_init();
-int spi_end();
-void transfer(int fd, uint8_t *tx, uint8_t *rx);
+int spi_close();
 void spi_transfer(uint8_t *tx, uint8_t *rx);
 void spi_stat();
 

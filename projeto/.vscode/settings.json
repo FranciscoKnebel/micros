@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "quanser_controller.h": "c",
+    "quanser_pwm.h": "c",
+    "unistd.h": "c",
+    "quanser_elbow.h": "c"
+  }
+}

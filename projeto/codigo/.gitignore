@@ -1,2 +1,6 @@
 **/*.o
 **/*.d
+quanser_controller
+quanser_pwm
+quanser_elbow
+quanser_motor

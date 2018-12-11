@@ -28,7 +28,8 @@
  *
  * Detailed explanation.
  */
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
   float angular_position = 0;
   float reference_angular_position = 0;
   float count_angle_constant = 1e-3;
@@ -38,7 +39,8 @@ int main(int argc, char *argv[]) {
   float integral_error = 0, derivative_error = 0, last_error = 0;
   int last_count = 0;
 
-  if (argc < 5) {
+  if (argc < 5)
+  {
     fprintf(stderr, "Usage: ./quanser_controller <reference_angular_position> "
                     "<p_gain> <i_gain> <d_gain> [<count_angle_constant>]");
     exit(1);
@@ -49,7 +51,8 @@ int main(int argc, char *argv[]) {
   sscanf(argv[3], "%f", &ki);
   sscanf(argv[4], "%f", &kd);
 
-  if (argc > 5) {
+  if (argc > 5)
+  {
     sscanf(argv[5], "%f", &count_angle_constant);
   }
 
@@ -83,5 +86,5 @@ int main(int argc, char *argv[]) {
     last_error = error;
   }
 
-  spi_end();
+  spi_close();
 }
