@@ -8,25 +8,37 @@
 #include <quanser_elbow.h>
 
 int main(int argc, char const *argv[]) {
-  int duty_cycle = 0;
+  int elbow_id = 0;
 
   if (argc < 2)
   {
-    fprintf(stderr, "Usage: ./quanser_pwm <duty_cycle> ");
+  }
+    fprintf(stderr, "Usage: ./quanser_elbow <elbow_id (1 or 2)> ");
     exit(1);
+
+  sscanf(argv[1], "%d", &elbow_id);
+
+  if(elbow_id != 1 && elbow_id != 2) {
+    fprintf(stderr, "Invalid elbow id value. Valid ids: 1, 2 ");
+    exit(2);
   }
 
-  sscanf(argv[1], "%d", &duty_cycle);
+  int status = 0;
+  char buffer[1];
 
   while(1) {
-    usleep(TIME_STEP);
+    if (elbow_id == 1) {
+      pgets(buffer, 1, "/sys/class/gpio/gpio13/value");
+    }  else {
+      pgets(buffer, 1, "/sys/class/gpio/gpio14/value");
+    }
 
-    pwm_set_period(PWM_PERIOD);
-    pwm_enable();
-    pwm_set_duty_cycle(duty_cycle);
-    usleep(TIME_STEP);
-    pwm_disable();
+    sscanf(buffer, "%d", &status);  
+    if (status == 1) {
+      printf("Done!\n");
+      return 0;
+    } else {
+      printf("Running...\n");
+    }
   }
-
-  return 0;
 }

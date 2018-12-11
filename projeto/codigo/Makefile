@@ -28,7 +28,7 @@ MODULE_OBJS = $(MODULE_SRCS:.c=.o)
 BUILD_TARGET = galileo11
 
 DOXYGENCONFIG=Doxyfile
-FLAGS=-O2 -Wall -g -MMD
+FLAGS=-O2 -Wall -g -MMD -m32
 INCLUDE=-I. -I./include
 LIB_DIR=-L./lib
 LIB_LIST=galileo2
