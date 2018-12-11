@@ -1,0 +1,99 @@
+\hypertarget{decoder_8c}{}\section{src/modules/decoder.c File Reference}
+\label{decoder_8c}\index{src/modules/decoder.\+c@{src/modules/decoder.\+c}}
+
+
+File containing example of doxygen usage for quick reference.  
+
+
+{\ttfamily \#include $<$decoder.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{decoder_8c_afd37cc07b87fa017a3d67cd5738f7004}{decoder\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Use brief, otherwise the index won\textquotesingle{}t have a brief explanation. \end{DoxyCompactList}\item 
+int \hyperlink{decoder_8c_af5454ed70b39ad9b515fdb01b4903553}{decoder\+\_\+read\+\_\+counter} ()
+\begin{DoxyCompactList}\small\item\em Use brief, otherwise the index won\textquotesingle{}t have a brief explanation. \end{DoxyCompactList}\item 
+void \hyperlink{decoder_8c_ad8bba108a5dbb063afaede2090dcd316}{decoder\+\_\+clear\+\_\+counter} ()
+\begin{DoxyCompactList}\small\item\em Use brief, otherwise the index won\textquotesingle{}t have a brief explanation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File containing example of doxygen usage for quick reference. 
+
+\begin{DoxyAuthor}{Author}
+Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+30 Nov 2018 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{decoder_8c_ad8bba108a5dbb063afaede2090dcd316}\label{decoder_8c_ad8bba108a5dbb063afaede2090dcd316}} 
+\index{decoder.\+c@{decoder.\+c}!decoder\+\_\+clear\+\_\+counter@{decoder\+\_\+clear\+\_\+counter}}
+\index{decoder\+\_\+clear\+\_\+counter@{decoder\+\_\+clear\+\_\+counter}!decoder.\+c@{decoder.\+c}}
+\subsubsection{\texorpdfstring{decoder\+\_\+clear\+\_\+counter()}{decoder\_clear\_counter()}}
+{\footnotesize\ttfamily void decoder\+\_\+clear\+\_\+counter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Use brief, otherwise the index won\textquotesingle{}t have a brief explanation. 
+
+Detailed explanation. 
+
+Definition at line 39 of file decoder.\+c.
+
+
+\begin{DoxyCode}
+39                              \{
+40   \textcolor{keywordtype}{char} wr\_data[1] = \{CLR\_CNTR\};
+41   \textcolor{keywordtype}{char} rd\_data[1];
+42   \hyperlink{spi_8c_aa97f8a540b00bcfe195c41aa99945e12}{spi\_transfer}((uint8\_t *)wr\_data, (uint8\_t *)rd\_data);
+43 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{decoder_8c_afd37cc07b87fa017a3d67cd5738f7004}\label{decoder_8c_afd37cc07b87fa017a3d67cd5738f7004}} 
+\index{decoder.\+c@{decoder.\+c}!decoder\+\_\+init@{decoder\+\_\+init}}
+\index{decoder\+\_\+init@{decoder\+\_\+init}!decoder.\+c@{decoder.\+c}}
+\subsubsection{\texorpdfstring{decoder\+\_\+init()}{decoder\_init()}}
+{\footnotesize\ttfamily void decoder\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Use brief, otherwise the index won\textquotesingle{}t have a brief explanation. 
+
+Detailed explanation. 
+
+Definition at line 15 of file decoder.\+c.
+
+
+\begin{DoxyCode}
+15                     \{
+16   \textcolor{keywordtype}{char} wr\_data[2] = \{WRITE\_MDR0, QUADRX1\};
+17   \textcolor{keywordtype}{char} rd\_data[2];
+18   \hyperlink{spi_8c_aa97f8a540b00bcfe195c41aa99945e12}{spi\_transfer}((uint8\_t *)wr\_data, (uint8\_t *)rd\_data);
+19 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{decoder_8c_af5454ed70b39ad9b515fdb01b4903553}\label{decoder_8c_af5454ed70b39ad9b515fdb01b4903553}} 
+\index{decoder.\+c@{decoder.\+c}!decoder\+\_\+read\+\_\+counter@{decoder\+\_\+read\+\_\+counter}}
+\index{decoder\+\_\+read\+\_\+counter@{decoder\+\_\+read\+\_\+counter}!decoder.\+c@{decoder.\+c}}
+\subsubsection{\texorpdfstring{decoder\+\_\+read\+\_\+counter()}{decoder\_read\_counter()}}
+{\footnotesize\ttfamily int decoder\+\_\+read\+\_\+counter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Use brief, otherwise the index won\textquotesingle{}t have a brief explanation. 
+
+Detailed explanation. 
+
+Definition at line 26 of file decoder.\+c.
+
+
+\begin{DoxyCode}
+26                            \{
+27   \textcolor{keywordtype}{char} wr\_data[1] = \{READ\_CNTR\};
+28   \textcolor{keywordtype}{int} rd\_data;
+29   \hyperlink{spi_8c_aa97f8a540b00bcfe195c41aa99945e12}{spi\_transfer}((uint8\_t *)wr\_data, (uint8\_t *)&rd\_data);
+30 
+31   \textcolor{keywordflow}{return} rd\_data;
+32 \}
+\end{DoxyCode}
