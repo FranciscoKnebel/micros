@@ -2,7 +2,7 @@
  * @file quanser_pwm.c
  * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
  * @date 30 Nov 2018
- * @brief File containing example of doxygen usage for quick reference.
+ * @brief Receive a duty cycle for PWM and enable it.
  */
 
 #include <quanser_pwm.h>

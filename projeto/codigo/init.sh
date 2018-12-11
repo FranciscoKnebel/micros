@@ -96,7 +96,7 @@ case "$1" in
 	echo -n "0" > /sys/class/gpio/gpio70/value
 	
 	## IO6 = INPUT S_SH2
-	if [ ! -d /sys/class/gpio/gpio4 ] ; then
+	if [ ! -d /sys/class/gpio/gpio1 ] ; then
 	    echo -n "1" > /sys/class/gpio/export
 	fi
 	echo -n "in" > /sys/class/gpio/gpio1/direction

@@ -23,11 +23,6 @@
 
 #include <quanser_controller.h>
 
-/**
- * @brief Use brief, otherwise the index won't have a brief explanation.
- *
- * Detailed explanation.
- */
 int main(int argc, char *argv[])
 {
   float angular_position = 0;

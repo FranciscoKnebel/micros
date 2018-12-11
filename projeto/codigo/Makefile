@@ -16,6 +16,8 @@ TARGET4_SRC = src/$(TARGET4).c
 TARGET4_OBJ = $(TARGET4_SRC:.c=.o)
 
 TARGET_LIST = $(TARGET) $(TARGET2) $(TARGET3) $(TARGET4)
+TARGET_SRCS = $(addsuffix .c, $(addprefix src/, ${TARGET_LIST}))
+TARGET_OBJS = $(TARGET_SRCS:.c=.o)
 
 # List of module files
 # MODULE_LIST contains the space-separated module list.
@@ -23,36 +25,42 @@ TARGET_LIST = $(TARGET) $(TARGET2) $(TARGET3) $(TARGET4)
 MODULE_LIST = decoder pwm spi h_bridge
 MODULE_SRCS = $(addsuffix .c, $(addprefix src/modules/, ${MODULE_LIST}))
 MODULE_OBJS = $(MODULE_SRCS:.c=.o)
+MODULE_LIB = shieldmodules
 
 # Build target machine to send compiled program
-BUILD_TARGET = galileo11
+BUILD_TARGET = galileo18
 
 DOXYGENCONFIG=Doxyfile
-FLAGS=-O2 -Wall -g -MMD -m32
+FLAGS=-m32 -O2 -Wall -g -MMD
 INCLUDE=-I. -I./include
 LIB_DIR=-L./lib
-LIB_LIST=galileo2
+LIB_LIST=$(MODULE_LIB) galileo2
 LIBS=$(addprefix -l, ${LIB_LIST})
 
 CC=$(CROSS_COMPILE)gcc
+CCAR=$(CROSS_COMPILE)ar
 CFLAGS=$(FLAGS) $(INCLUDE)
 LDFLAGS=$(LIB_DIR) $(LIBS)
+CCARFLAGS=-crvs
 
 .PHONY: all
-all: $(TARGET_LIST)
+all: $(MODULE_LIB) $(TARGET_LIST)
 	@echo "Build finished."
 
-$(TARGET): $(MODULE_OBJS) $(TARGET_OBJ) 
+$(TARGET): $(TARGET_OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-$(TARGET2): $(MODULE_OBJS) $(TARGET2_OBJ) 
+$(TARGET2): $(TARGET2_OBJ) 
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-$(TARGET3): $(MODULE_OBJS) $(TARGET3_OBJ) 
+$(TARGET3): $(TARGET3_OBJ) 
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-$(TARGET4): $(MODULE_OBJS) $(TARGET4_OBJ) 
+$(TARGET4): $(TARGET4_OBJ) 
 	$(CC) -o $@ $^ $(LDFLAGS)
+
+$(MODULE_LIB): $(MODULE_OBJS)
+	$(CCAR) $(CCARFLAGS) lib/lib$@.a $^
 
 %.o: %.c c
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -63,6 +71,8 @@ clean:
 	rm -f *~ *.bak
 	rm src/**/*.d src/**/*.o
 	rm ${TARGET_LIST}
+	rm ${TARGET_OBJS}
+	rm ${TARGET_OBJS:.o=.d}
 
 docs: Doxyfile DoxygenLayout.xml README.md LICENSE.md $(TARGET_LIST)
 	@echo "Building Doxygen..."
