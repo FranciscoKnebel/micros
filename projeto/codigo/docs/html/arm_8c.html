@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>QuanserShield: include/pwm.h File Reference</title>
+<title>QuanserShield: src/modules/arm.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('pwm_8h.html','');});
+$(document).ready(function(){initNavTree('arm_8c.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -92,48 +92,43 @@ $(document).ready(function(){initNavTree('pwm_8h.html','');});
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">pwm.h File Reference</div>  </div>
+<div class="title">arm.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header for the PWM module, containing PWM function helpers and manipulators.  
+<p>Module containing arm helper functions.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;galileo2io.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="arm_8h_source.html">arm.h</a>&gt;</code><br />
 </div>
-<p><a href="pwm_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="arm_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a28a132858465a2b1d46a46fd179cb19a"><td class="memItemLeft" align="right" valign="top"><a id="a28a132858465a2b1d46a46fd179cb19a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pwm_8h.html#a28a132858465a2b1d46a46fd179cb19a">pwm_enable</a> ()</td></tr>
-<tr class="memdesc:a28a132858465a2b1d46a46fd179cb19a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable PWM3. <br /></td></tr>
-<tr class="separator:a28a132858465a2b1d46a46fd179cb19a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc718f6835b4c01682047af9ddea9f9b"><td class="memItemLeft" align="right" valign="top"><a id="abc718f6835b4c01682047af9ddea9f9b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pwm_8h.html#abc718f6835b4c01682047af9ddea9f9b">pwm_disable</a> ()</td></tr>
-<tr class="memdesc:abc718f6835b4c01682047af9ddea9f9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable PWM3. <br /></td></tr>
-<tr class="separator:abc718f6835b4c01682047af9ddea9f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c0ecab2a673445e6f7e951c48715ece"><td class="memItemLeft" align="right" valign="top"><a id="a3c0ecab2a673445e6f7e951c48715ece"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pwm_8h.html#a3c0ecab2a673445e6f7e951c48715ece">pwm_set_period</a> (int period)</td></tr>
-<tr class="memdesc:a3c0ecab2a673445e6f7e951c48715ece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the period on the PWM device. <br /></td></tr>
-<tr class="separator:a3c0ecab2a673445e6f7e951c48715ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a264425632556910779d274533808f77b"><td class="memItemLeft" align="right" valign="top"><a id="a264425632556910779d274533808f77b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pwm_8h.html#a264425632556910779d274533808f77b">pwm_set_duty_cycle</a> (int pwm_set_duty_cycle)</td></tr>
-<tr class="memdesc:a264425632556910779d274533808f77b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the duty cycle for PWM3. <br /></td></tr>
-<tr class="separator:a264425632556910779d274533808f77b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4b940847a1c1bfcaccd9e9a8a7ee37"><td class="memItemLeft" align="right" valign="top"><a id="a0d4b940847a1c1bfcaccd9e9a8a7ee37"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm_8c.html#a0d4b940847a1c1bfcaccd9e9a8a7ee37">detect_endoftrajectory_elbow</a> (int index)</td></tr>
+<tr class="memdesc:a0d4b940847a1c1bfcaccd9e9a8a7ee37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect if reached end of trajectory in 'index' elbow. <br /></td></tr>
+<tr class="separator:a0d4b940847a1c1bfcaccd9e9a8a7ee37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33aa1fd24908538e43b22bde13517237"><td class="memItemLeft" align="right" valign="top"><a id="a33aa1fd24908538e43b22bde13517237"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm_8c.html#a33aa1fd24908538e43b22bde13517237">detect_endoftrajectory_shoulder</a> (int index)</td></tr>
+<tr class="memdesc:a33aa1fd24908538e43b22bde13517237"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect if reached end of trajectory in 'index' shoulder. <br /></td></tr>
+<tr class="separator:a33aa1fd24908538e43b22bde13517237"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acee4bb0ff83daa3514d6bfff9febcf60"><td class="memItemLeft" align="right" valign="top"><a id="acee4bb0ff83daa3514d6bfff9febcf60"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm_8c.html#acee4bb0ff83daa3514d6bfff9febcf60">read_arm</a> (int i)</td></tr>
+<tr class="memdesc:acee4bb0ff83daa3514d6bfff9febcf60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read value of arm element and returns if finished (0) or not (1) <br /></td></tr>
+<tr class="separator:acee4bb0ff83daa3514d6bfff9febcf60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header for the PWM module, containing PWM function helpers and manipulators. </p>
+<div class="textblock"><p>Module containing arm helper functions. </p>
 <dl class="section author"><dt>Author</dt><dd>Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>11 Dez 2018 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="pwm_8h_source.html">pwm.h</a>.</p>
+<p class="definition">Definition in file <a class="el" href="arm_8c_source.html">arm.c</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pwm_8h.html">pwm.h</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddb4d7e95cc2d6c8e1ade10a20d7247d.html">modules</a></li><li class="navelem"><a class="el" href="arm_8c.html">arm.c</a></li>
     <li class="footer">Generated on Wed Dec 12 2018 10:32:15 for QuanserShield by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>

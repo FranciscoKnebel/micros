@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pwm_2ec',['pwm.c',['../pwm_8c.html',1,'']]],
-  ['pwm_2eh',['pwm.h',['../pwm_8h.html',1,'']]]
+  ['h_5fbridge_2ec',['h_bridge.c',['../h__bridge_8c.html',1,'']]],
+  ['h_5fbridge_2eh',['h_bridge.h',['../h__bridge_8h.html',1,'']]]
 ];
