@@ -47,6 +47,7 @@ int main(int argc, char const *argv[]) {
   pwm_set_period(PWM_PERIOD);
   pwm_enable();
   duty_cycle = voltage * DUTY_SLOPE + DUTY_LIMIT;
+  printf("duty cycle: %d\n", duty_cycle);
   pwm_set_duty_cycle(duty_cycle);
 
   h_bridge_enable();
