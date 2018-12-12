@@ -28,7 +28,7 @@ MODULE_OBJS = $(MODULE_SRCS:.c=.o)
 MODULE_LIB = shieldmodules
 
 # Build target machine to send compiled program
-BUILD_TARGET = galileo18
+BUILD_TARGET = galileo2
 
 FLAGS=-m32 -O2 -Wall -g -MMD
 INCLUDE=-I. -I./include
