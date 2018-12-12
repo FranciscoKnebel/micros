@@ -1,16 +1,14 @@
 /**
  * @file modules/decoder.c
  * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
- * @date 30 Nov 2018
- * @brief File containing example of doxygen usage for quick reference.
+ * @date 11 Dez 2018
+ * @brief Module for decoder functions and helpers.
  */
 
 #include <decoder.h>
 
 /**
- * @brief Use brief, otherwise the index won't have a brief explanation.
- *
- * Detailed explanation.
+ * @brief Initializes the decoder.
  */
 void decoder_init() {
   char wr_data[2] = {WRITE_MDR0, QUADRX1};
@@ -19,9 +17,7 @@ void decoder_init() {
 }
 
 /**
- * @brief Use brief, otherwise the index won't have a brief explanation.
- *
- * Detailed explanation.
+ * @brief Read decoder counter.
  */
 int decoder_read_counter() {
   char wr_data[1] = {READ_CNTR};
@@ -32,9 +28,7 @@ int decoder_read_counter() {
 }
 
 /**
- * @brief Use brief, otherwise the index won't have a brief explanation.
- *
- * Detailed explanation.
+ * @brief Clear the decoder counter.
  */
 void decoder_clear_counter() {
   char wr_data[1] = {CLR_CNTR};

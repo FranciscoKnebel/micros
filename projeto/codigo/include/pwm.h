@@ -1,15 +1,16 @@
 /**
  * @file pwm.h
  * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
- * @date 30 Nov 2018
- * @brief File containing example of doxygen usage for quick reference.
+ * @date 11 Dez 2018
+ * @brief Header for the PWM module, containing PWM function helpers and
+ * manipulators.
  */
 
 #ifndef PWM_H_
 #define PWM_H_
 
-#include <stdio.h>
 #include <galileo2io.h>
+#include <stdio.h>
 
 int pwm_enable();
 int pwm_disable();

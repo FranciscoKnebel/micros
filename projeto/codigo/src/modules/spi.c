@@ -1,7 +1,7 @@
 /**
  * @file modules/spi.c
  * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
- * @date 30 Nov 2018
+ * @date 11 Dez 2018
  * @brief Module containing SPI helpers and functions.
  */
 
@@ -13,7 +13,8 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
 /**
- * @brief Helper function for errors, to warn users about failures in program execution.
+ * @brief Helper function for errors, to warn users about failures in program
+ * execution.
  */
 void send_error(const char *s) {
   perror(s);
@@ -97,7 +98,7 @@ void spi_transfer(uint8_t *tx, uint8_t *rx) {
 }
 
 /**
- * @brief Get SPI data values. 
+ * @brief Get SPI data values.
  */
 void spi_stat() {
   printf("Modo SPI: 0x%x\n", mode);

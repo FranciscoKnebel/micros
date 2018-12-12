@@ -1,6 +1,6 @@
 # QuanserShield
 
-TODO...
+Intel Galileo Gen 2 shield for use with the Quanser 2DSFJE robot.
 
 ## Prerequisites
 - Doxygen
@@ -17,6 +17,8 @@ TODO...
 - Compile the full project with `make`.
 - Clean built files with `make clean`.
 
+Don't forget to setup environment variables from `iss_setup.sh`;
+
 ### Documentation
 Compile the project documentation to `docs/` folder.
 ```
@@ -26,7 +28,7 @@ Compile the project documentation to `docs/` folder.
 Then you can open the `docs/html/index.html` file and search the `Files` section for code documentation.
 To change the docs generation configuration, you need to install the `doxygen-gui` config and run:
 ```
-  $ 
+  $ doxywizard Doxyfile
 ```
 
 ## Versioning
@@ -76,4 +78,4 @@ See also the full list of [contributors](https://github.com/FranciscoKnebel/micr
 
 ## License
 
-This project is licensed under the _MIT_ License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the _GNU GENERAL PUBLIC LICENSE_ - see the [LICENSE.md](LICENSE.md) file for details.

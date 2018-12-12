@@ -1,7 +1,7 @@
 /**
  * @file quanser_pwm.c
  * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
- * @date 30 Nov 2018
+ * @date 11 Dez 2018
  * @brief Receive a duty cycle for PWM and enable it.
  */
 
@@ -10,15 +10,14 @@
 int main(int argc, char const *argv[]) {
   int duty_cycle = 0;
 
-  if (argc < 2)
-  {
+  if (argc < 2) {
     fprintf(stderr, "Usage: ./quanser_pwm <duty_cycle> ");
     exit(1);
   }
 
   sscanf(argv[1], "%d", &duty_cycle);
 
-  while(1) {
+  while (1) {
     usleep(TIME_STEP);
 
     pwm_set_period(PWM_PERIOD);

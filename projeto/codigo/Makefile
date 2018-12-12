@@ -1,4 +1,4 @@
-# Main target program
+# Main target programs
 TARGET = quanser_controller
 TARGET_SRC = src/$(TARGET).c
 TARGET_OBJ = $(TARGET_SRC:.c=.o)
@@ -30,7 +30,6 @@ MODULE_LIB = shieldmodules
 # Build target machine to send compiled program
 BUILD_TARGET = galileo18
 
-DOXYGENCONFIG=Doxyfile
 FLAGS=-m32 -O2 -Wall -g -MMD
 INCLUDE=-I. -I./include
 LIB_DIR=-L./lib
@@ -70,13 +69,11 @@ $(MODULE_LIB): $(MODULE_OBJS)
 clean:
 	rm -f *~ *.bak
 	rm src/**/*.d src/**/*.o
-	rm ${TARGET_LIST}
-	rm ${TARGET_OBJS}
-	rm ${TARGET_OBJS:.o=.d}
+	rm ${TARGET_LIST} ${TARGET_OBJS} ${TARGET_OBJS:.o=.d}
 
 docs: Doxyfile DoxygenLayout.xml README.md LICENSE.md $(TARGET_LIST)
 	@echo "Building Doxygen..."
-	doxygen ${DOXYGENCONFIG}
+	doxygen
 
 send: all
 	scp quanser_* micros@$(BUILD_TARGET):

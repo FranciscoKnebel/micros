@@ -1,22 +1,22 @@
 /**
  * @file spi.h
  * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
- * @date 30 Nov 2018
- * @brief File containing example of doxygen usage for quick reference.
+ * @date 11 Dez 2018
+ * @brief Module containing SPI helper functions.
  */
 
 #ifndef SPI_H_
 #define SPI_H_
 
+#include <fcntl.h>
+#include <getopt.h>
+#include <linux/spi/spidev.h>
+#include <linux/types.h>
 #include <stdint.h>
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <getopt.h>
-#include <fcntl.h>
 #include <sys/ioctl.h>
-#include <linux/types.h>
-#include <linux/spi/spidev.h>
+#include <unistd.h>
 
 void send_error(const char *s);
 int spi_init();

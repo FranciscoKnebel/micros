@@ -1,8 +1,9 @@
 /**
  * @file quanser_motor.c
  * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
- * @date 30 Nov 2018
- * @brief Receive voltage, calculate the duty cicle and set the movement of the elbow.
+ * @date 11 Dez 2018
+ * @brief Receive voltage, calculate the duty cicle and set the movement of the
+ * elbow.
  */
 
 #include <quanser_motor.h>
@@ -11,20 +12,19 @@ int main(int argc, char const *argv[]) {
   int voltage = 0;
   int duty_cycle = 0;
 
-  if (argc < 2)
-  {
+  if (argc < 2) {
     fprintf(stderr, "Usage: ./quanser_motor <voltage> ");
     exit(1);
   }
 
   sscanf(argv[1], "%d", &voltage);
 
-  if (voltage > MAX_VOLTAGE || voltage < MIN_VOLTAGE)
-  {
-    fprintf(stderr, "Invalid voltage input value. Max value '%d' - Min value '%d'", MAX_VOLTAGE, MIN_VOLTAGE);
+  if (voltage > MAX_VOLTAGE || voltage < MIN_VOLTAGE) {
+    fprintf(stderr,
+            "Invalid voltage input value. Max value '%d' - Min value '%d'",
+            MAX_VOLTAGE, MIN_VOLTAGE);
     exit(2);
   }
-
 
   h_bridge_disable();
 

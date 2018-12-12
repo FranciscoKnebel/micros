@@ -1,7 +1,7 @@
 /**
  * @file modules/pwm.c
  * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
- * @date 30 Nov 2018
+ * @date 11 Dez 2018
  * @brief Module containing PWM helper functions.
  */
 

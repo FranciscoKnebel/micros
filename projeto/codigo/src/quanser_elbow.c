@@ -1,7 +1,7 @@
 /**
  * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
  * @file quanser_elbow.c
- * @date 30 Nov 2018
+ * @date 11 Dez 2018
  * @brief Detect end of trajectory of elbow 1 or 2.
  */
 
@@ -14,7 +14,7 @@ int main(int argc, char const *argv[]) {
   int shoulder2 = 0;
   char buffer[1];
 
-  while(1) {
+  while (1) {
     // gpio13 = elbow 1
     pgets(buffer, 1, "/sys/class/gpio/gpio13/value");
     sscanf(buffer, "%d", &elbow1);
@@ -31,9 +31,7 @@ int main(int argc, char const *argv[]) {
     pgets(buffer, 1, "/sys/class/gpio/gpio1/value");
     sscanf(buffer, "%d", &shoulder2);
 
-    printf(
-      "e1: %d - e2: %d - s1: %d - s2: %d\n",
-      elbow1, elbow2, shoulder1, shoulder2
-    );
+    printf("e1: %d - e2: %d - s1: %d - s2: %d\n", elbow1, elbow2, shoulder1,
+           shoulder2);
   }
 }
