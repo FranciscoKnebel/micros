@@ -42,17 +42,25 @@ int main(int argc, char const *argv[]) {
     exit(2);
   }
 
+  printf("1\n");
   h_bridge_disable();
+  printf("2\n");
 
   pwm_set_period(PWM_PERIOD);
+  printf("3\n");
   pwm_enable();
+  printf("4\n");
   duty_cycle = voltage * DUTY_SLOPE + DUTY_LIMIT;
   printf("duty cycle: %d\n", duty_cycle);
+  printf("5\n");
   pwm_set_duty_cycle(duty_cycle);
+  printf("6\n");
 
   h_bridge_enable();
+  printf("7\n");
   usleep(TIME_STEP);
 
+  printf("8\n");
   h_bridge_disable();
   pwm_disable();
 
