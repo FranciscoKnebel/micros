@@ -180,7 +180,7 @@ case "$1" in
 	echo -n "1" > /sys/class/gpio/gpio66/value
 	echo -n "1000000" > /sys/class/pwm/pwmchip0/device/pwm_period
 	echo -n "500000" > /sys/class/pwm/pwmchip0/pwm3/duty_cycle
-    echo -n "0" > /sys/class/pwm/pwmchip0/pwm3/enable
+    # echo -n "0" > /sys/class/pwm/pwmchip0/pwm3/enable
 
 	### SERIAL INTERFACE SPI
 
