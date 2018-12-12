@@ -15,12 +15,13 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * @file quanser_controller.c
+ * @file quanser_pid.c
  * @author Francisco Knebel, Luciano Zancan, Rodrigo Dal Ri
  * @date 11 Dez 2018
+ * @brief Run PID communication for reading the encoders.
  */
 
-#include <quanser_controller.h>
+#include <quanser_pid.h>
 
 int main(int argc, char *argv[]) {
   float angular_position = 0;
@@ -33,7 +34,7 @@ int main(int argc, char *argv[]) {
   int last_count = 0;
 
   if (argc < 5) {
-    fprintf(stderr, "Usage: ./quanser_controller <reference_angular_position> "
+    fprintf(stderr, "Usage: ./quanser_pid <reference_angular_position> "
                     "<p_gain> <i_gain> <d_gain> [<count_angle_constant>]");
     exit(1);
   }
@@ -57,6 +58,7 @@ int main(int argc, char *argv[]) {
     int current_count = decoder_read_counter();
     int delta_count = current_count - last_count;
 
+    // Receives the position of the elbow in radians
     angular_position = angular_position + (count_angle_constant * delta_count);
 
     error = reference_angular_position - angular_position;

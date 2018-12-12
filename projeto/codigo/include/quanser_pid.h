@@ -4,8 +4,8 @@
  * @date 11 Dez 2018
  */
 
-#ifndef QUANSER_CONTROLLER_H
-#define QUANSER_CONTROLLER_H
+#ifndef QUANSER_PID_H
+#define QUANSER_PID_H
 
 #include <decoder.h>
 #include <pwm.h>

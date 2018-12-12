@@ -1,21 +1,5 @@
 # Main target programs
-TARGET = quanser_controller
-TARGET_SRC = src/$(TARGET).c
-TARGET_OBJ = $(TARGET_SRC:.c=.o)
-
-TARGET2 = quanser_pwm
-TARGET2_SRC = src/$(TARGET2).c
-TARGET2_OBJ = $(TARGET2_SRC:.c=.o)
-
-TARGET3 = quanser_motor
-TARGET3_SRC = src/$(TARGET3).c
-TARGET3_OBJ = $(TARGET3_SRC:.c=.o)
-
-TARGET4 = quanser_elbow
-TARGET4_SRC = src/$(TARGET4).c
-TARGET4_OBJ = $(TARGET4_SRC:.c=.o)
-
-TARGET_LIST = $(TARGET) $(TARGET2) $(TARGET3) $(TARGET4)
+TARGET_LIST = quanser_pid quanser_pwm quanser_motor quanser_elbow
 TARGET_SRCS = $(addsuffix .c, $(addprefix src/, ${TARGET_LIST}))
 TARGET_OBJS = $(TARGET_SRCS:.c=.o)
 
@@ -43,24 +27,19 @@ LDFLAGS=$(LIB_DIR) $(LIBS)
 CCARFLAGS=-crvs
 
 .PHONY: all
-all: $(MODULE_LIB) $(TARGET_LIST)
+all: lib/lib$(MODULE_LIB).a $(TARGET_LIST)
 	@echo "Build finished."
 
-$(TARGET): $(TARGET_OBJ)
+## Build target programs, linking main targets with module lib.
+$(TARGET_LIST): % : src/%.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-$(TARGET2): $(TARGET2_OBJ) 
-	$(CC) -o $@ $^ $(LDFLAGS)
+## Build lib of modules into .a file
+lib/lib$(MODULE_LIB).a: $(MODULE_OBJS)
+	$(CCAR) $(CCARFLAGS) $@ $^
+	@echo "Module lib compiled."
 
-$(TARGET3): $(TARGET3_OBJ) 
-	$(CC) -o $@ $^ $(LDFLAGS)
-
-$(TARGET4): $(TARGET4_OBJ) 
-	$(CC) -o $@ $^ $(LDFLAGS)
-
-$(MODULE_LIB): $(MODULE_OBJS)
-	$(CCAR) $(CCARFLAGS) lib/lib$@.a $^
-
+## Compile and assemble modules into object files, but does not link.
 %.o: %.c c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
@@ -68,8 +47,7 @@ $(MODULE_LIB): $(MODULE_OBJS)
 
 clean:
 	rm -f *~ *.bak
-	rm src/**/*.d src/**/*.o
-	rm ${TARGET_LIST} ${TARGET_OBJS} ${TARGET_OBJS:.o=.d}
+	rm ${TARGET_LIST} ${TARGET_OBJS} ${TARGET_OBJS:.o=.d} lib/lib${MODULE_LIB}.a ${MODULE_OBJS} ${MODULE_OBJS:.o=.d}
 
 docs: Doxyfile DoxygenLayout.xml README.md LICENSE.md $(TARGET_LIST)
 	@echo "Building Doxygen..."
