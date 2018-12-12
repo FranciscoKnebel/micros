@@ -1,5 +1,8 @@
 {
   "files.associations": {
-    "decoder.h": "c"
+    "decoder.h": "c",
+    "quanser_elbow.h": "c",
+    "pwm.h": "c",
+    "arm.h": "c"
   }
 }

@@ -7,6 +7,7 @@
 #ifndef QUANSER_ELBOW_H
 #define QUANSER_ELBOW_H
 
+#include <arm.h>
 #include <pwm.h>
 #include <stdio.h>
 #include <stdlib.h>
