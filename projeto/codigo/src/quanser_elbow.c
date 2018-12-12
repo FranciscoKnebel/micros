@@ -41,8 +41,7 @@ int main(int argc, char const *argv[]) {
     
     // gpio1 = shoulder 2
     shoulder2 = detect_endoftrajectory_shoulder(2);
-  
-    printf("e1: %d - e2: %d - s1: %d - s2: %d\n", elbow1, elbow2, shoulder1,
-           shoulder2);
+    //- e2: %d - s1: %d - s2: %d
+    printf("end of trajectory: %d \n", elbow1);
   }
 }
