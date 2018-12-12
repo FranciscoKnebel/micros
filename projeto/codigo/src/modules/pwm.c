@@ -47,5 +47,7 @@ int pwm_set_period(int period) {
  */
 int pwm_set_duty_cycle(int duty_cycle) {
   sprintf(str, "%d", duty_cycle);
+
+  printf("set duty: %s\n", str);
   return pputs("/sys/class/pwm/pwmchip0/pwm3/duty_cycle", str);
 }
