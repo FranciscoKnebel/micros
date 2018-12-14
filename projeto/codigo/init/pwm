@@ -1,13 +1,14 @@
 #! /bin/sh
+
 ### BEGIN INIT INFO
-# Provides:          eng10032lab06_1
+# Provides:         
 # Required-Start:    
 # Should-Start:      
 # Required-Stop:     
 # Default-Start:     S
 # Default-Stop:
-# Short-Description: Configures GPIO and PWM for Lab 06.
-# Description:       Configures GPIO and PWMfor Lab 06.
+# Short-Description: Configures GPIO and PWM.
+# Description:       Configures GPIO and PWM.
 ### END INIT INFO
 
 case "$1" in
