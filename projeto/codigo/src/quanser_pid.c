@@ -60,6 +60,7 @@ int main(int argc, char *argv[]) {
 
     // Receives the position of the elbow in radians
     angular_position = angular_position + (count_angle_constant * delta_count);
+    printf("angular position: %f\n", angular_position);
 
     error = reference_angular_position - angular_position;
     integral_error = integral_error + error * TIME_STEP;
