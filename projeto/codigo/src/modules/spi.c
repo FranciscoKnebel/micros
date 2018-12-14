@@ -102,7 +102,7 @@ void spi_transfer(uint8_t *tx, uint8_t *rx) {
       .speed_hz = speed,
       .bits_per_word = bits,
   };
-
+  puts('enviando...');
   ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
   if (ret < 1) {
     send_error("Erro ao tentar enviar mensagem pelo SPI.");
