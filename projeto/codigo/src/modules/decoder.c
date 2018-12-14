@@ -39,6 +39,7 @@ int decoder_read_counter() {
   char wr_data[1] = {READ_CNTR};
   int rd_data;
   spi_transfer((uint8_t *)wr_data, (uint8_t *)&rd_data);
+  printf("read counter: %d %d\n", wr_data, rd_data);
 
   return rd_data;
 }
