@@ -108,6 +108,7 @@ void spi_transfer(uint8_t *tx, uint8_t *rx) {
     send_error("Erro ao tentar enviar mensagem pelo SPI.");
   }
 
+  printf("ret %d - array size %d\n", ret, ARRAY_SIZE(rx));
   for (ret = 0; ret < ARRAY_SIZE(rx); ret++) {
     printf("%x ", rx[ret]);
   }
